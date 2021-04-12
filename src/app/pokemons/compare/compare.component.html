@@ -1,0 +1,56 @@
+<mat-dialog-content class="mat-typography">
+    <mat-card class="example-card">
+      <mat-card-header class="title">
+        <mat-card-title>{{pokemonA.name}} vs {{pokemonB.name}}</mat-card-title>
+      </mat-card-header>
+      <div class="pokemon-container">
+      <div class="image-container">
+        <img mat-card-image src="{{1}}" alt="{{pokemonA.name}}">
+        <img mat-card-image src="" alt="{{pokemonB.name}}">
+      </div>
+      <mat-card-content class="description">
+        <p>
+          
+        </p>
+        <span class="stats">
+          <span class="description-container">
+            <span class ="description-title">
+              Height:
+            </span>
+            <span class="description-value">
+              10 m
+            </span>
+          </span>
+  
+          <span class="description-container">
+            <span class ="description-title">
+              Weight:
+            </span>
+            <span class="description-value">
+              10 kg
+            </span>
+          </span>
+  
+          <span class="description-container">
+            <span class ="description-title">
+              Gender:
+            </span>
+            <span class="description-value">
+              male
+            </span>
+          </span>
+  
+
+        </span>
+      </mat-card-content>
+      
+      </div>
+      <!-- <app-chart [stats]="stats"></app-chart> -->
+    </mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Compare</button>
+    <button mat-button cdkFocusInitial>Favorite</button>
+  </mat-dialog-actions>
+  
