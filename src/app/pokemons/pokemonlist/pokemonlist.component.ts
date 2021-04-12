@@ -43,7 +43,6 @@ export class PokemonListComponent implements OnInit, AfterContentInit {
     console.log(value)
   }
   onIntersection(){
-    console.log("me vieron");
     this.store.dispatch(PokemonsActions.loadPokemons());
     this.page++;
   }

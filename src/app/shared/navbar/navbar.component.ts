@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit {
 
 
   pokemonFilter(value: any) {
-    console.log('val',value)
     this.store.dispatch(PokemonsActions.enableFiltering({filter: value}));
   }
 
