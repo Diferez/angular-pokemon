@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { tap, catchError, map } from 'rxjs/operators'
 import { Observable, ObservableInput, throwError } from "rxjs";
-import { Pokemon } from "../shared/models/pokemon.model";
+import { Favorite, Pokemon } from "../shared/models/pokemon.model";
 @Injectable({
     providedIn: 'root',
 })
 export class PokemonsService {
     page = 0;
     private pokemonApiUrl = 'https://pokeapi.co/api/v2/pokemon/';
-
+    private favoritesUrl = 'api/heroes';
     constructor(private http: HttpClient) { }
 
     getPokemons(): Observable<Pokemon[]> {
@@ -40,7 +40,36 @@ export class PokemonsService {
             );
     }
 
+    getFavorites(): Observable<Favorite[]>{
+        return this.http.get<Favorite[]>(this.favoritesUrl)
+        .pipe(
+            tap(data => console.log("Favs ", data)),
+            catchError(this.handleError)
+            );
+    }
     
+    addFavorite(favorite: Favorite): Observable<Favorite> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const newFavorite = { ...favorite, id: null };
+        return this.http.post<Favorite>(this.favoritesUrl, newFavorite, { headers })
+          .pipe(
+            tap(data => console.log('addFavorite: ' + JSON.stringify(data))),
+            catchError(this.handleError)
+          );
+    }
+
+    removeFavorite(id: number): Observable<{}> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const url = `${this.favoritesUrl}/${id}`;
+        return this.http.delete<Favorite>(url, { headers })
+          .pipe(
+            tap(data => console.log('deleteFavorite: ' + id)),
+            catchError(this.handleError)
+          );
+    }
+
+
+
     private handleError(err: HttpErrorResponse) { 
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {

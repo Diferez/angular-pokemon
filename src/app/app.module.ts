@@ -17,6 +17,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HomeModule } from './home/home.module';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 
 const routes: Routes = [

@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
   
   set filter(value:string){
-    this._filter = value;
+    this._filter = value.toLowerCase();
     if(this._filter !== ''){
       this.store.dispatch(PokemonsActions.enableFiltering({filter: this._filter}));
     }else{
@@ -34,14 +34,5 @@ export class NavbarComponent implements OnInit {
   links = [{label:'Home', path:'home'},{label:'Pokemons', path:'pokemons'}];
   activeLink = this.links[0];
 
-
-  pokemonFilter(value: any) {
-    this.store.dispatch(PokemonsActions.enableFiltering({filter: value}));
-  }
-
-  handleClick(){
-    
-  }
-  
   
 }

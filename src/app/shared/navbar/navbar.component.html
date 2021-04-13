@@ -11,11 +11,9 @@
           {{link.label}}
         </a>
       </nav>
-      <button (click)="handleClick()">Hola</button>
-      <mat-form-field class="search-bar">
+      <mat-form-field class="search-bar" [ngStyle] = "{'visibility': activeLink.label === 'Pokemons' ? '': 'hidden'}">
         <input matInput type="text" placeholder="Search" [(ngModel)]="filter" >
       </mat-form-field>
-      
     </header>
 </mat-toolbar>
 <router-outlet></router-outlet>

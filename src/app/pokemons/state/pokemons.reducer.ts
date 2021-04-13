@@ -1,6 +1,7 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { Pokemon } from "src/app/shared/models/pokemon.model";
+import { Favorite, Pokemon } from "src/app/shared/models/pokemon.model";
 import * as PokemonsActions from './pokemons.actions'
+import * as ApiActions from './api.actions'
 
 export interface PokemonsState{
   isFiltering: boolean;
@@ -12,6 +13,7 @@ export interface PokemonsState{
   pokemonA:any|null;
   pokemonB:any|null;
   compare:boolean;
+  favorites:Favorite[];
 }
 
 const initialState: PokemonsState = {
@@ -28,6 +30,7 @@ const initialState: PokemonsState = {
   pokemonA: null,
   pokemonB: null,
   compare: false,
+  favorites: [],
 }
 
 const getPokemonFeatureState = createFeatureSelector<PokemonsState>('pokemons');
@@ -70,6 +73,11 @@ export const getPokemonB = createSelector(
 export const getCompare = createSelector(
   getPokemonFeatureState,
   state => state.compare,
+);
+
+export const getFavorites = createSelector(
+  getPokemonFeatureState,
+  state => state.favorites,
 );
 
 export const pokemonsReducer = createReducer<PokemonsState>(
@@ -125,6 +133,12 @@ export const pokemonsReducer = createReducer<PokemonsState>(
       pokemonStats:action.pokemon,
     }
   }),
+  on(ApiActions.loadFavoritesSuccess, (state, action): PokemonsState => {
+    return{
+      ...state,
+      favorites:action.favorites,
+    }
+  }),
   on(PokemonsActions.loadPokemonDetailsSuccess, (state, action): PokemonsState => {
     return{
       ...state,
@@ -134,13 +148,13 @@ export const pokemonsReducer = createReducer<PokemonsState>(
   on(PokemonsActions.setPokemonA, (state): PokemonsState => {
     return{
       ...state,
-      pokemonA: state.selectedPokemon,
+      pokemonA: state.pokemonStats,
     }
   }),
   on(PokemonsActions.setPokemonB, (state): PokemonsState => {
     return{
       ...state,
-      pokemonB: state.selectedPokemon,
+      pokemonB: state.pokemonStats,
       compare:true,
     }
   }),
@@ -151,4 +165,16 @@ export const pokemonsReducer = createReducer<PokemonsState>(
       pokemonB: null,
     }
   }),
+  on(ApiActions.addFavoriteSuccess, (state, action): PokemonsState => {
+    return{
+      ...state,
+      favorites:[...state.favorites, action.favorite],
+    }
+  }),
+  // on(ApiActions.removeFavoriteSuccess, (state, action): PokemonsState => {
+  //   return{
+  //     ...state,
+  //     favorites: state.favorites.filter(favorite => favorite.id !== action.favoriteId),
+  //   }
+  // }),
 );
