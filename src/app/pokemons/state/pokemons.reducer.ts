@@ -1,7 +1,7 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { Favorite, Pokemon, Stats } from "src/app/shared/models/pokemon.model";
 import * as PokemonsActions from './pokemons.actions'
-import * as ApiActions from './api.actions'
+
 
 export interface PokemonsState{
   isFiltering: boolean;
@@ -13,7 +13,6 @@ export interface PokemonsState{
   pokemonA: Stats|null;
   pokemonB: Stats|null;
   compare: boolean;
-  favorites: Favorite[];
 }
 
 const initialState: PokemonsState = {
@@ -29,9 +28,9 @@ const initialState: PokemonsState = {
     name: '',
     height: 0,
     weight: 0,
-    sprites: {},
-    abilities: [],
-    types: [],
+    sprites: {front_default: ''},
+    abilities: [{ability:{name:''}}],
+    types: [{type:{name:''}}],
     stats: [
       {
         base_stat: 0
@@ -57,7 +56,6 @@ const initialState: PokemonsState = {
   pokemonA: null,
   pokemonB: null,
   compare: false,
-  favorites: [],
 }
 
 const getPokemonFeatureState = createFeatureSelector<PokemonsState>('pokemons');
@@ -102,10 +100,6 @@ export const getCompare = createSelector(
   state => state.compare,
 );
 
-export const getFavorites = createSelector(
-  getPokemonFeatureState,
-  state => state.favorites,
-);
 
 export const pokemonsReducer = createReducer<PokemonsState>(
   initialState,
@@ -161,12 +155,6 @@ export const pokemonsReducer = createReducer<PokemonsState>(
       pokemonStats:action.pokemon,
     }
   }),
-  on(ApiActions.loadFavoritesSuccess, (state, action): PokemonsState => {
-    return{
-      ...state,
-      favorites:action.favorites,
-    }
-  }),
   on(PokemonsActions.loadPokemonDetailsSuccess, (state, action): PokemonsState => {
     return{
       ...state,
@@ -193,16 +181,4 @@ export const pokemonsReducer = createReducer<PokemonsState>(
       pokemonB: null,
     }
   }),
-  on(ApiActions.addFavoriteSuccess, (state, action): PokemonsState => {
-    return{
-      ...state,
-      favorites:[...state.favorites, action.favorite],
-    }
-  }),
-  // on(ApiActions.removeFavoriteSuccess, (state, action): PokemonsState => {
-  //   return{
-  //     ...state,
-  //     favorites: state.favorites.filter(favorite => favorite.id !== action.favoriteId),
-  //   }
-  // }),
 );

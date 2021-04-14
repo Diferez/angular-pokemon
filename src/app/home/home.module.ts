@@ -5,7 +5,6 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { pokemonsReducer } from '../pokemons/state/pokemons.reducer';
 import { StoreModule } from '@ngrx/store';
 
-
 @NgModule({
   declarations: [HomeComponent],
   imports: [

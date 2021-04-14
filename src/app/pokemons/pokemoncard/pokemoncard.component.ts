@@ -13,8 +13,8 @@ import { getPokemonStats } from '../state/pokemons.reducer';
   styleUrls: ['./pokemoncard.component.css']
 })
 export class PokemoncardComponent {
-  @Input() pokemon:any;
-  @Input() imgUrl:any;
+  @Input() pokemon:Pokemon = {name:'', url:'', imgUrl:''};
+  @Input() imgUrl:string='';
   constructor(public dialog: MatDialog, private pokemonsService: PokemonsService, private store: Store<State>) { }
   detailsUrl='https://pokeapi.co/api/v2/pokemon-species/'
   selectPokemon(){

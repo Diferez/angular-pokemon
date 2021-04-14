@@ -1,11 +1,11 @@
 .pokemon-img{
-    image-rendering: pixelated;
+  image-rendering: pixelated;
 }
 .carousel-cell{
-    text-align: center;
+  text-align: center;
 }
 .carousel{
-    margin-top: 5%;
-    font-weight: 700;
-    font-size: 1.5rem;
+  margin-top: 5%;
+  font-weight: 700;
+  font-size: 1.5rem;
 }

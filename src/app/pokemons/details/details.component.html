@@ -20,7 +20,6 @@
             {{pokemon.height/10}}m
           </span>
         </span>
-
         <span class="description-container">
           <span class ="description-title">
             Weight:
@@ -29,7 +28,6 @@
             {{pokemon.weight/10}}kg
           </span>
         </span>
-
         <span class="description-container">
           <span class ="description-title">
             Gender:
@@ -38,7 +36,6 @@
             {{gender}}
           </span>
         </span>
-
         <span class="description-container-list">
           <span class ="description-title">
             Abilities:
@@ -47,7 +44,6 @@
             <div *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</div>
           </div>
         </span>
-
         <span class="description-container-list">
           <span class ="description-title">
             Type:
@@ -57,9 +53,7 @@
           </div>
         </span>
       </span>
-    
     </mat-card-content>
-    
     </div>
     <div class="chart">
       <app-chart [stats]="stats"></app-chart>

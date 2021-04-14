@@ -4,14 +4,17 @@ import { ChartDataSets } from 'chart.js';
 import { State } from 'src/app/state/app.state';
 import { getPokemonA, getPokemonB, getPokemonDetails } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
+import { Stats } from 'src/app/shared/models/pokemon.model';
 @Component({
   selector: 'app-compare',
   templateUrl: './compare.component.html',
   styleUrls: ['./compare.component.css']
 })
 export class CompareComponent implements OnInit, OnDestroy {
-  pokemonA: any;
-  pokemonB: any;
+  pokemonA: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
+      [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};
+  pokemonB: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
+      [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};
   pokemonAsex:string = '';
   pokemonBsex:string = '';
   dataset: ChartDataSets[] = [];
@@ -23,14 +26,13 @@ export class CompareComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.select(getPokemonA).subscribe(
-      pokemon => this.pokemonA = pokemon
+      pokemon => this.pokemonA = pokemon!
     );
 
     this.store.select(getPokemonB).subscribe(
-      pokemon => this.pokemonB = pokemon
+      pokemon => this.pokemonB = pokemon!
     );
     
-    console.log('comprando', this.pokemonA, this.pokemonB)
     this.pokemonAsex = this.getGender();
     this.pokemonBsex = this.getGender();
     
@@ -55,7 +57,6 @@ export class CompareComponent implements OnInit, OnDestroy {
           label: this.pokemonB.name }
     
     this.dataset = [datasetA, datasetB]
-    console.log(this.dataset)
   }
 
   getGender():string{

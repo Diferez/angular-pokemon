@@ -6,16 +6,16 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 @NgModule({
   imports: [MatButtonModule,
-            MatTabsModule,
-            MatInputModule,
-            MatToolbarModule,
-            MatCardModule,
-        ],
+      MatTabsModule,
+      MatInputModule,
+      MatToolbarModule,
+      MatCardModule,
+    ],
   exports: [MatButtonModule,
-            MatTabsModule,
-            MatInputModule,
-            MatToolbarModule,
-            MatCardModule,
-        ],
+      MatTabsModule,
+      MatInputModule,
+      MatToolbarModule,
+      MatCardModule,
+    ],
 })
 export class MaterialModule { }

@@ -1,16 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterContentInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Observable, throwError } from 'rxjs';
-import { PokemonsService } from 'src/app/core/pokemons.service';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { throwError } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
 import { State } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { getPokemonA, getPokemonDetails, getPokemonStats } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
-import { CompareComponent } from '../compare/compare.component';
 import { LocalstoreService } from 'src/app/core/localstore.service';
-import { Favorite, Stats } from 'src/app/shared/models/pokemon.model';
+import { Details, Favorite, Stats } from 'src/app/shared/models/pokemon.model';
 
 @Component({
   selector: 'app-details',
@@ -19,15 +17,16 @@ import { Favorite, Stats } from 'src/app/shared/models/pokemon.model';
 })
 export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   errorMessage: string = '';
-  pokemon: any = {};
-  description: any = {};
+  pokemon: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
+  [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};;
+  description: Details = {flavor_text_entries:[{flavor_text:''}]};
   stats: ChartDataSets[] = [];
   gender: string = '';
   descriptionText: string = '';
-  pokemonA:any=null;
+  pokemonA:Stats={name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
+  [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};;
   isFavorite:boolean= false;
-  
-  pokemon$: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private store: Store<State>, public dialog: MatDialog, private local:LocalstoreService) {
     
   }
@@ -48,9 +47,6 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.pokemon$ = this.store.select(getPokemonStats);
-    
-    
     this.store.select(getPokemonStats).subscribe(
       pokemon => {
         this.pokemon = pokemon;
@@ -68,19 +64,18 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
     this.store.select(getPokemonDetails).subscribe(
       details => {
         this.description = details;
-        console.log("Descript",this.description);
       }
     );
     
 
     this.store.select(getPokemonA).subscribe(
-      pokemon => this.pokemonA = pokemon
+      pokemon => this.pokemonA = pokemon!
     );
   }
   
-  getDescription():any{
+  getDescription():string{
     let obj = this.description.flavor_text_entries.find((element: any) => element.language.name === 'en');
-    return obj['flavor_text'].replace('', '');
+    return obj!['flavor_text'].replace('', '');
   }
 
   getGender():string{
@@ -106,8 +101,11 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   addFavorite(){
     if(!this.isFavorite){
       let favorite: Favorite = {path:this.pokemon.sprites.front_default, name: this.pokemon.name}
-      this.local.addFavorite(favorite);
-      this.isFavorite=true;
+      let resp = this.local.addFavorite(favorite);
+      if(resp){
+        this.isFavorite=true;
+      }
+      
     }else{
       this.local.deleteFavorite(this.pokemon.name)
       this.isFavorite=false;

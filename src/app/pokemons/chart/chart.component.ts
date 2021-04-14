@@ -9,11 +9,10 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  @Input() stats:any;
+  @Input() stats:ChartDataSets[]=[{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
   
   public barChartOptions: ChartOptions = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], 
               yAxes: [{
                 ticks: {

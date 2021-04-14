@@ -4,7 +4,6 @@ import { createEffects } from "@ngrx/effects/src/effects_module";
 import { catchError, concatMap, map, mergeMap, switchMap } from "rxjs/operators";
 import { PokemonsService } from "src/app/core/pokemons.service";
 import * as PokemonsActions from './pokemons.actions';
-import * as ApiActions from './api.actions';
 import { of } from "rxjs";
 @Injectable()
 export class PokemonsEffects {
@@ -40,42 +39,4 @@ export class PokemonsEffects {
             ))
         )
     })
-
-    loadFavorites$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(ApiActions.loadFavorites),
-            mergeMap(() => this.pokemonsService.getFavorites().pipe(
-                map(favorites => ApiActions.loadFavoritesSuccess({ favorites })),
-                catchError(error => of(ApiActions.loadFavoritesFailure({ error })))
-            ))
-        )
-    })
-
-    addFavorite$ = createEffect(() => {
-        return this.actions$
-          .pipe(
-            ofType(ApiActions.addFavorite),
-            concatMap(action =>
-              this.pokemonsService.addFavorite(action.favorite)
-                .pipe(
-                  map(favorite => ApiActions.addFavoriteSuccess({ favorite })),
-                  catchError(error => of(ApiActions.addFavoriteFailure({ error })))
-                )
-            )
-          );
-      });
-
-    removeFavorite$ = createEffect(() => {
-        return this.actions$
-          .pipe(
-            ofType(ApiActions.removeFavorite),
-            mergeMap(action =>
-              this.pokemonsService.removeFavorite(action.favoriteId).pipe(
-                map(() => ApiActions.removeFavoriteSuccess({ favoriteId: action.favoriteId })),
-                catchError(error => of(ApiActions.removeFavoriteFailure({ error })))
-              )
-            )
-          );
-      });
-
 }

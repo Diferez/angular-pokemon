@@ -1,6 +1,5 @@
-import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PokemonsService } from 'src/app/core/pokemons.service';
 import * as PokemonsActions from '../../pokemons/state/pokemons.actions';
 
 @Component({
@@ -28,11 +27,8 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   links = [{label:'Home', path:'home'},{label:'Pokemons', path:'pokemons'}];
   activeLink = this.links[0];
-
-  
 }
