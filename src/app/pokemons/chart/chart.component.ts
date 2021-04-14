@@ -27,7 +27,8 @@ export class ChartComponent implements OnInit {
         anchor: 'end',
         align: 'end',
       }
-    }
+    },
+    maintainAspectRatio: true
   };
   
   public barChartLabels: Label[] = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];

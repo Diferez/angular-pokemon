@@ -1,19 +1,19 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { Favorite, Pokemon } from "src/app/shared/models/pokemon.model";
+import { Favorite, Pokemon, Stats } from "src/app/shared/models/pokemon.model";
 import * as PokemonsActions from './pokemons.actions'
 import * as ApiActions from './api.actions'
 
 export interface PokemonsState{
   isFiltering: boolean;
-  selectedPokemon: Pokemon|null;
+  selectedPokemon: Pokemon | null;
   pokemons: Pokemon[];
   pokemonsFiltered: Pokemon[];
-  pokemonStats: any;
+  pokemonStats: Stats;
   pokemonDetails: any;
-  pokemonA:any|null;
-  pokemonB:any|null;
-  compare:boolean;
-  favorites:Favorite[];
+  pokemonA: Stats|null;
+  pokemonB: Stats|null;
+  compare: boolean;
+  favorites: Favorite[];
 }
 
 const initialState: PokemonsState = {
@@ -25,7 +25,34 @@ const initialState: PokemonsState = {
   },
   pokemons: [],
   pokemonsFiltered: [],
-  pokemonStats: {},
+  pokemonStats: {
+    name: '',
+    height: 0,
+    weight: 0,
+    sprites: {},
+    abilities: [],
+    types: [],
+    stats: [
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      }
+    ]
+  },
   pokemonDetails: {},
   pokemonA: null,
   pokemonB: null,
@@ -93,6 +120,7 @@ export const pokemonsReducer = createReducer<PokemonsState>(
     return {
       ...state,
       isFiltering: false,
+      pokemonsFiltered: state.pokemons,
     };
   }),
   on(PokemonsActions.enableCompare, (state):PokemonsState =>{

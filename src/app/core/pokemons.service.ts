@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { tap, catchError, map } from 'rxjs/operators'
 import { Observable, ObservableInput, throwError } from "rxjs";
-import { Favorite, Pokemon } from "../shared/models/pokemon.model";
+import { Favorite, Pokemon, Stats } from "../shared/models/pokemon.model";
 @Injectable({
     providedIn: 'root',
 })
@@ -25,8 +25,8 @@ export class PokemonsService {
         );
     }
 
-    getPokemon(url:string): Observable<any>{
-        return this.http.get<any>(url)
+    getPokemon(url:string): Observable<Stats>{
+        return this.http.get<Stats>(url)
         .pipe(
             tap(data => console.log("Pokes ", data)),
             catchError(this.handleError)

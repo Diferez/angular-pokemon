@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-html, body { height: auto; }
+html, body { 
+    height: auto; 
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.snack .mat-snack-bar-container{
+    font-size: 20rem;
+}
+
+.cdk-overlay-container{
+    width: 100vw;
+}
+
+@media (max-width: 500px){
+    .compare-dialog{
+        
+        height: 60vh;
+    }
+
+    .details-dialog{
+        height: 75vh;
+        width: 90vh;
+    }
+
+
+}   
+

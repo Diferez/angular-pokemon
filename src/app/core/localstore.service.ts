@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from "@angular/material/snack-bar";
 import { BehaviorSubject } from "rxjs";
 import { getFavorites } from "../pokemons/state/pokemons.reducer";
 import { Favorite } from "../shared/models/pokemon.model";
@@ -11,7 +12,7 @@ export class LocalstoreService{
                                     {path: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", name:'charmander'},
                                     {path: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", name:'squirtle'}];
     favorites = new BehaviorSubject(this.initialFavorites);
-    constructor(){
+    constructor( private _snackBar: MatSnackBar){
         localStorage.setItem('favorites',JSON.stringify(this.initialFavorites))
     }
 
@@ -22,7 +23,12 @@ export class LocalstoreService{
             this.favorites.next(temporalFavorites);
             localStorage.setItem('favorites', JSON.stringify(temporalFavorites));
         }else{
-            alert('You already have 5 favorites')
+            let horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+            let verticalPosition: MatSnackBarVerticalPosition = 'top';
+            this._snackBar.open('You already have 5 favorites', '', 
+            {verticalPosition: verticalPosition, 
+             horizontalPosition: horizontalPosition,
+             duration: 5 * 1000});
         }
     }
     

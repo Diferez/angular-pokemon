@@ -5,10 +5,10 @@
     </mat-card-header>
     <div class="pokemon-container">
     <div class="image-container">
-      <img mat-card-image [src]="pokemon.sprites.front_default" alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="pokemon.sprites.front_default" alt="{{pokemon.name}}">
     </div>
     <mat-card-content class="description">
-      <p>
+      <p >
         {{getDescription()}}
       </p>
       <span class="stats">
@@ -39,32 +39,35 @@
           </span>
         </span>
 
-        <span class="description-container">
+        <span class="description-container-list">
           <span class ="description-title">
             Abilities:
           </span>
-          <ul>
-            <li *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</li>
-          </ul>
+          <div>
+            <div *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</div>
+          </div>
         </span>
 
-        <span class="description-container">
+        <span class="description-container-list">
           <span class ="description-title">
             Type:
           </span>
-          <ul>
-            <li *ngFor="let type of pokemon.types">{{type.type.name}}</li>
-          </ul>
+          <div>
+            <div *ngFor="let type of pokemon.types">{{type.type.name}}</div>
+          </div>
         </span>
       </span>
+    
     </mat-card-content>
     
     </div>
-    <app-chart [stats]="stats"></app-chart>
+    <div class="chart">
+      <app-chart [stats]="stats"></app-chart>
+    </div>
   </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close>Close</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="selectPokemon()">Compare</button>
   <button mat-button cdkFocusInitial (click)='addFavorite()' [ngStyle] = "{'background-color': isFavorite ? 'yellow': ''}">Favorite</button >
 </mat-dialog-actions>

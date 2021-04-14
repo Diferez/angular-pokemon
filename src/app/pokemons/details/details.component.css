@@ -10,6 +10,12 @@
     width: 30%;
     margin: 1%;
 }
+.description-container-list{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 1%;
+}
 .pokemon-container{
     display: flex;
     justify-content: center;
@@ -38,3 +44,35 @@
 .favorite{
     background-color: yellow;
 }
+
+@media (max-width: 500px){
+    
+    .pokemon-container{
+
+        flex-direction: column;
+
+    }
+    .image-container{
+        align-self: center;
+        width: 90%;
+        margin-bottom: none;
+    }
+    .description{
+        width: 85%;
+        font-size: 1rem;
+    }
+
+    
+    .description-container-list{
+        margin: 4%;
+    }
+
+    .description-container-list{
+        margin: 4%;
+        width: 40%;
+    }
+
+    .description-container-list ul{
+        list-style-type: none;
+    }
+}   

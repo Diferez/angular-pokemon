@@ -4,9 +4,12 @@
     [autoplay]="true"
     [dots]="true"
     [loop]="true"
-    [height]=400>
+    [height]=400
+    [cellsToShow]=3>
     <div *ngFor="let item of $favorites |async" class="carousel-cell">
-        <img  src="{{item.path}}">
+        {{item.name | uppercase}}
+        <img class="pokemon-img"  src="{{item.path}}">
+        
     </div>
 </carousel>
 

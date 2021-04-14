@@ -23,7 +23,7 @@ export class PokemoncardComponent {
     this.store.dispatch(PokemonsActions.setSelectedPokemon({pokemon:poke}));
     this.store.dispatch(PokemonsActions.loadPokemon({url:this.pokemon.url}));
     this.store.dispatch(PokemonsActions.loadPokemonDetails({url:Url}))
-    const dialogRef = this.dialog.open(DetailsComponent);
+    const dialogRef = this.dialog.open(DetailsComponent, {panelClass:'details-dialog'});
   }
 
 

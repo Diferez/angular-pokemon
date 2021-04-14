@@ -10,7 +10,6 @@
       </div>
       <mat-card-content class="description">
         <span class="stats">
-          
             <span class="description-value">
               {{pokemonA.height/10}} m
             </span>
@@ -20,9 +19,6 @@
             <span class="description-value">
               {{pokemonB.height/10}} m
             </span>
-          
-
-          
             <span class="description-value">
               {{pokemonA.weight/10}} m
             </span>
@@ -32,9 +28,6 @@
             <span class="description-value">
               {{pokemonB.weight/10}} m
             </span>
-          
-
-          
             <span class="description-value">
               {{pokemonAsex}}
             </span>
@@ -44,29 +37,26 @@
             <span class="description-value">
               {{pokemonBsex}}
             </span>
-          
-
-          
             <span>
               <div class="pokemon-ability">
                 <div *ngFor="let ability of pokemonA.abilities" >{{ability.ability.name}}</div>
               </div>
             </span>
-
             <span class ="description-title">
               Abilities:
             </span>
-
             <span>
               <div>
                 <div *ngFor="let ability of pokemonB.abilities">{{ability.ability.name}}</div>
               </div>
             </span>
-          
         </span>
       </mat-card-content>
-
     </div>
     <app-chart [stats]="dataset"></app-chart>
   </mat-card>
+
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

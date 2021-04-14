@@ -1,4 +1,6 @@
-
+.mobile-tool-bar{
+    display: none;
+}
 .tool-bar{
     height: 5rem;
     position: sticky;
@@ -22,4 +24,30 @@
 }
 .search-bar{
     padding-top: 0.55rem;
+}
+
+.nav-link{
+    color: white;
+    
+}
+@media (max-width: 500px){
+    .tool-bar{
+        display: none;
+    }
+
+    .mobile-tool-bar{
+        display: flex;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+    .first-row{
+        display: flex;
+        justify-content: space-between;
+    }
+    .second-row{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

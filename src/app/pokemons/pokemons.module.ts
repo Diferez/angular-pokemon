@@ -14,6 +14,7 @@ import { pokemonsReducer } from './state/pokemons.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PokemonsEffects } from './state/pokemons.effects';
 import { CompareComponent } from './compare/compare.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CompareComponent } from './compare/compare.component';
     ChartsModule,
     StoreModule.forFeature('pokemons', pokemonsReducer),
     EffectsModule.forFeature([PokemonsEffects]),
+    MatSnackBarModule,
   ]
 })
 export class PokemonsModule { }

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterContentInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { PokemonsService } from 'src/app/core/pokemons.service';
 import { ChartDataSets } from 'chart.js';
 import { State } from 'src/app/state/app.state';
@@ -10,7 +10,7 @@ import { getPokemonA, getPokemonDetails, getPokemonStats } from '../state/pokemo
 import * as PokemonsActions from '../state/pokemons.actions';
 import { CompareComponent } from '../compare/compare.component';
 import { LocalstoreService } from 'src/app/core/localstore.service';
-import { Favorite } from 'src/app/shared/models/pokemon.model';
+import { Favorite, Stats } from 'src/app/shared/models/pokemon.model';
 
 @Component({
   selector: 'app-details',
@@ -27,6 +27,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   pokemonA:any=null;
   isFavorite:boolean= false;
   
+  pokemon$: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private store: Store<State>, public dialog: MatDialog, private local:LocalstoreService) {
     
   }
@@ -47,6 +48,8 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.pokemon$ = this.store.select(getPokemonStats);
+    
     
     this.store.select(getPokemonStats).subscribe(
       pokemon => {
@@ -61,7 +64,6 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
         this.isFavorite = this.checkFavorite(pokemon.name);
       }
     );
-
     
     this.store.select(getPokemonDetails).subscribe(
       details => {
@@ -96,7 +98,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
       this.store.dispatch(PokemonsActions.setPokemonA());
     }else{
       this.store.dispatch(PokemonsActions.setPokemonB());
-      const dialogRef = this.dialog.open(CompareComponent);
+
     }
 
   }

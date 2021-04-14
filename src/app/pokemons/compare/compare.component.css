@@ -3,6 +3,7 @@
     width: 25vw;
     
 }
+
 .image-container{
     display: flex;
     justify-content: space-between;
@@ -21,15 +22,26 @@
     justify-content: space-between;
     align-content: center;
 }
+
 .description-container-list{
     display: flex;
     justify-content: space-between;
     align-content: center;
 }
+
 .description-title{
     font-weight: 700;
 }
+
 .title{
     display: flex;
     align-content: center;
+}
+
+@media (max-width: 770px) {
+    .pokemon-img{
+        display: inline-block;
+        width: 35vw;
+        
+    }
 }

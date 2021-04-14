@@ -1,10 +1,13 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/state/app.state';
-import { getCompare, getIsFiltering, getPokemons } from '../state/pokemons.reducer';
+import { getCompare, getIsFiltering, getPokemonA, getPokemons } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
 import {Pokemon} from '../../shared/models/pokemon.model'
 import { Observable } from 'rxjs';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { CompareComponent } from '../compare/compare.component';
 
 @Component({
   selector: 'app-pokemons',
@@ -12,27 +15,64 @@ import { Observable } from 'rxjs';
   styleUrls: ['./pokemonlist.component.css']
 })
 
-export class PokemonListComponent implements OnInit, AfterContentInit {
-  compare$:any;
+export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy {
+
   errorMessage = '';
   filtering = true;
-  pokemons$: any;
-  constructor( private store: Store<State> ) { }
-  
-  ngOnInit(): void {
+  pokemons$: Observable<Pokemon[]>;
+  //subscriptions
+  isFiltering$:any;
+  compare$:any;
+  dialogClosed$:any;
+  pokemonA$:any;
+
+  constructor( private store: Store<State>, private _snackBar: MatSnackBar,  public dialog: MatDialog) { 
     this.pokemons$ = this.store.select(getPokemons);
+  }
+
+  ngOnDestroy(): void {
+    this.isFiltering$.unsubscribe();
+    this.compare$.unsubscribe();
+    this.dialogClosed$.unsubscribe();
+    this.pokemonA$.unsubscribe();
+  }
+
+  compare = false;
+  ngOnInit(): void {
+    
     this.store.dispatch(PokemonsActions.loadPokemons());
-    this.store.select(getIsFiltering).subscribe(
+
+    this.isFiltering$ = this.store.select(getIsFiltering).subscribe(
       isFiltering => this.filtering = isFiltering
     );
-    this.compare$ = this.store.select(getCompare);
-    console.log(this.pokemons$);
+
+    this.compare$ = this.store.select(getCompare).subscribe(
+      compare =>{
+        this.compare = compare;
+        if(compare){
+          this.closeSnackBar();
+        }
+      }
+    );
+
+    this.dialogClosed$ = this.dialog.afterAllClosed.subscribe(()=>{
+      if(this.compare){
+        const dialogRef = this.dialog.open(CompareComponent, {panelClass:'compare-dialog'});
+      }
+      
+    });
+    this.pokemonA$ = this.store.select(getPokemonA).subscribe(
+      pokemonA => {
+        if (pokemonA !== null){
+          this.openSnackBar(pokemonA.name);
+        }
+      }
+    );
   }
 
   ngAfterContentInit(): void {
     this.filtering = false;
   }
-
 
   onIntersection(event:IntersectionObserverEntry[]){
     event.map((inter) => {
@@ -41,4 +81,15 @@ export class PokemonListComponent implements OnInit, AfterContentInit {
       }
     });
   }
+
+  openSnackBar(name:string) {
+    let horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+    let verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+    this._snackBar.open(name.toUpperCase(), '', {panelClass: 'snack', verticalPosition: verticalPosition, horizontalPosition:horizontalPosition});
+  }
+  closeSnackBar() {
+    this._snackBar.dismiss();
+  }
 }
+
+
