@@ -17,18 +17,90 @@ import { Details, Favorite, Stats } from 'src/app/shared/models/pokemon.model';
 })
 export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   errorMessage: string = '';
-  pokemon: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
-  [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};;
+  pokemon: Stats = {
+    name: '', 
+    height: 0, 
+    weight: 0, 
+    sprites: {
+      front_default: ''
+    }, 
+    abilities: [{
+      ability: {
+        name: ''
+      }
+    }], 
+    types: [{
+      type: {
+        name: ''
+      }
+    }],
+    stats: [
+      {
+        base_stat: 0 
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      }
+    ]
+  };
+  pokemonA:Stats= {
+    name: '', 
+    height: 0, 
+    weight: 0, 
+    sprites: {
+      front_default: ''
+    }, 
+    abilities: [{
+      ability: {
+        name: ''
+      }
+    }], 
+    types: [{
+      type: {
+        name: ''
+      }
+    }], 
+    stats: [
+      {
+        base_stat: 0 
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      }
+    ]
+  };
   description: Details = {flavor_text_entries:[{flavor_text:''}]};
   stats: ChartDataSets[] = [];
   gender: string = '';
   descriptionText: string = '';
-  pokemonA:Stats={name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
-  [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};;
+  
   isFavorite:boolean= false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private store: Store<State>, public dialog: MatDialog, private local:LocalstoreService) {
-    
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store<State>, private dialog: MatDialog, private local:LocalstoreService) {
   }
 
   checkFavorite(name:string){
@@ -46,7 +118,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
     
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.store.select(getPokemonStats).subscribe(
       pokemon => {
         this.pokemon = pokemon;
@@ -56,7 +128,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
           this.pokemon.stats[3].base_stat, 
           this.pokemon.stats[4].base_stat, 
           this.pokemon.stats[5].base_stat,], 
-          label: this.pokemon.name }];
+        label: this.pokemon.name }];
         this.isFavorite = this.checkFavorite(pokemon.name);
       }
     );
@@ -66,16 +138,19 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
         this.description = details;
       }
     );
-    
-
+  
     this.store.select(getPokemonA).subscribe(
       pokemon => this.pokemonA = pokemon!
     );
   }
   
   getDescription():string{
-    let obj = this.description.flavor_text_entries.find((element: any) => element.language.name === 'en');
-    return obj!['flavor_text'].replace('', '');
+    try{
+      let obj = this.description.flavor_text_entries.find((element: any) => element.language.name === 'en');
+      return obj!['flavor_text'].replace('', '');
+    }catch{
+      return '';
+    }
   }
 
   getGender():string{
@@ -93,9 +168,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
       this.store.dispatch(PokemonsActions.setPokemonA());
     }else{
       this.store.dispatch(PokemonsActions.setPokemonB());
-
     }
-
   }
 
   addFavorite(){
@@ -105,14 +178,13 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
       if(resp){
         this.isFavorite=true;
       }
-      
     }else{
       this.local.deleteFavorite(this.pokemon.name)
       this.isFavorite=false;
     }
-
   }
-  private handleError(err: HttpErrorResponse) { 
+
+  handleError(err: HttpErrorResponse) { 
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
         errorMessage = `An error occurred: ${err.error.message}`;

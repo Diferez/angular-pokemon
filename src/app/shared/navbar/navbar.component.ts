@@ -29,6 +29,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  links = [{label:'Home', path:'home'},{label:'Pokemons', path:'pokemons'}];
+  links = [{
+    label:'Home', path:'home'
+  }, 
+  {
+    label:'Pokemons', path:'pokemons'
+  }];
   activeLink = this.links[0];
 }

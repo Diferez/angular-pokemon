@@ -5,16 +5,90 @@ import { State } from 'src/app/state/app.state';
 import { getPokemonA, getPokemonB, getPokemonDetails } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
 import { Stats } from 'src/app/shared/models/pokemon.model';
+
 @Component({
   selector: 'app-compare',
   templateUrl: './compare.component.html',
   styleUrls: ['./compare.component.css']
 })
+
 export class CompareComponent implements OnInit, OnDestroy {
-  pokemonA: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
-      [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};
-  pokemonB: Stats = {name: '', height: 0, weight: 0, sprites: {front_default:''}, abilities: [{ability:{name:''}}], types: [{type:{name:''}}], stats: 
-      [{base_stat: 0 },{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0},{base_stat: 0}]};
+  pokemonA: Stats = {
+    name: '', 
+    height: 0, 
+    weight: 0, 
+    sprites: {
+      front_default: ''
+    }, 
+    abilities: [{
+      ability: {
+        name:''
+      }
+    }], 
+    types: [{
+      type: {
+        name: ''
+      }
+    }], 
+    stats: [
+      {
+        base_stat: 0 
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      }
+    ]
+  };
+  pokemonB: Stats = {
+    name: '', 
+    height: 0, 
+    weight: 0, 
+    sprites: {
+      front_default:''
+    }, 
+    abilities: [{
+      ability: {
+        name: ''
+      }
+    }], 
+    types: [{
+      type: {
+        name: ''
+      }
+    }], 
+    stats: [
+      {
+        base_stat: 0 
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      },
+      {
+        base_stat: 0
+      }
+    ]
+  };
   pokemonAsex:string = '';
   pokemonBsex:string = '';
   dataset: ChartDataSets[] = [];
@@ -38,23 +112,27 @@ export class CompareComponent implements OnInit, OnDestroy {
     
     let datasetA: ChartDataSets = {
       data:[
-          this.pokemonA.stats[0].base_stat, 
-          this.pokemonA.stats[1].base_stat, 
-          this.pokemonA.stats[2].base_stat, 
-          this.pokemonA.stats[3].base_stat, 
-          this.pokemonA.stats[4].base_stat, 
-          this.pokemonA.stats[5].base_stat],
-          label: this.pokemonA.name }
+        this.pokemonA.stats[0].base_stat, 
+        this.pokemonA.stats[1].base_stat, 
+        this.pokemonA.stats[2].base_stat, 
+        this.pokemonA.stats[3].base_stat, 
+        this.pokemonA.stats[4].base_stat, 
+        this.pokemonA.stats[5].base_stat
+        ],
+      label: this.pokemonA.name
+    }
       
     let datasetB: ChartDataSets = {
       data:[
-          this.pokemonA.stats[0].base_stat, 
-          this.pokemonB.stats[1].base_stat, 
-          this.pokemonB.stats[2].base_stat, 
-          this.pokemonB.stats[3].base_stat, 
-          this.pokemonB.stats[4].base_stat, 
-          this.pokemonB.stats[5].base_stat],
-          label: this.pokemonB.name }
+        this.pokemonA.stats[0].base_stat, 
+        this.pokemonB.stats[1].base_stat, 
+        this.pokemonB.stats[2].base_stat, 
+        this.pokemonB.stats[3].base_stat, 
+        this.pokemonB.stats[4].base_stat, 
+        this.pokemonB.stats[5].base_stat
+        ],
+      label: this.pokemonB.name 
+    }
     
     this.dataset = [datasetA, datasetB]
   }

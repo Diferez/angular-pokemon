@@ -4,22 +4,17 @@ import { State } from '../state/app.state';
 import { LocalstoreService } from '../core/localstore.service';
 import { Favorite } from '../shared/models/pokemon.model';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+
+export class HomeComponent {
   $favorites:Observable<Favorite[]>;
 
-  constructor(private store: Store<State>, private local: LocalstoreService) { 
+  constructor(private local: LocalstoreService) { 
     this.$favorites = this.local.favorites;
   }
-
-  ngOnInit(): void {
-    
-  }
 }
-
-
-

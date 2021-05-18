@@ -1,5 +1,5 @@
-import { createAction, props } from "@ngrx/store"
-import { Pokemon, Stats } from "src/app/shared/models/pokemon.model";
+import { createAction, props } from '@ngrx/store'
+import { Pokemon, Stats, Details } from 'src/app/shared/models/pokemon.model';
 
 export const enableFiltering = createAction(
     '[Pokemons] Filtering On',
@@ -63,7 +63,7 @@ export const loadPokemonDetails = createAction(
 
 export const loadPokemonDetailsSuccess = createAction(
     '[Pokemons] Load Success Pokemon Details',
-    props<{details:any}>()
+    props<{details:Stats}>()
 );
 
 export const loadPokemonDetailsFailed = createAction(

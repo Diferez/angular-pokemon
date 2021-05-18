@@ -29,7 +29,11 @@ const initialState: PokemonsState = {
     height: 0,
     weight: 0,
     sprites: {front_default: ''},
-    abilities: [{ability:{name:''}}],
+    abilities: [{
+      ability: {
+        name: ''
+      }
+    }],
     types: [{type:{name:''}}],
     stats: [
       {

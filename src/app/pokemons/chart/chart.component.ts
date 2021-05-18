@@ -11,16 +11,17 @@ import { Label } from 'ng2-charts';
 export class ChartComponent implements OnInit {
   @Input() stats:ChartDataSets[]=[{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
   
-  public barChartOptions: ChartOptions = {
+  barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], 
-              yAxes: [{
-                ticks: {
-                  min: 0,
-                  suggestedMax: 110,
-                }
-              }] },
-    
+    scales: { 
+      xAxes: [{}], 
+      yAxes: [{
+        ticks: {
+          min: 0,
+          suggestedMax: 110,
+        }
+      }] 
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -30,13 +31,13 @@ export class ChartComponent implements OnInit {
     maintainAspectRatio: true
   };
   
-  public barChartLabels: Label[] = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
+  barChartLabels: Label[] = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
 
-  public barChartType: ChartType = 'bar';
+  barChartType: ChartType = 'bar';
 
-  public barChartLegend = true;
+  barChartLegend = true;
 
-  public barChartPlugins = [pluginDataLabels];
+  barChartPlugins = [pluginDataLabels];
 
   constructor() { }
 
@@ -44,11 +45,11 @@ export class ChartComponent implements OnInit {
     
   }
 
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 }

@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { MatDialog } from '@angular/material/dialog';
 import { CompareComponent } from '../compare/compare.component';
 
+
 @Component({
   selector: 'app-pokemons',
   templateUrl: './pokemonlist.component.html',
@@ -20,18 +21,17 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
   errorMessage = '';
   filtering = true;
   pokemons$: Observable<Pokemon[]>;
-  //subscriptions
-  isFiltering$: Subscription;
-  compare$: Subscription;
-  dialogClosed$: Subscription;
-  pokemonA$: Subscription;
+  isFilteringSub: Subscription;
+  compareSub: Subscription;
+  dialogClosedSub: Subscription;
+  pokemonASub: Subscription;
 
-  constructor( private store: Store<State>, private _snackBar: MatSnackBar,  public dialog: MatDialog) { 
+  constructor( private store: Store<State>, private _snackBar: MatSnackBar,  private dialog: MatDialog) { 
     this.pokemons$ = this.store.select(getPokemons);
-    this.isFiltering$ = this.store.select(getIsFiltering).subscribe(
-      isFiltering => this.filtering = isFiltering
+    this.isFilteringSub = this.store.select(getIsFiltering).subscribe(
+      isFilteringSub => this.filtering = isFilteringSub
     );
-    this.compare$ = this.store.select(getCompare).subscribe(
+    this.compareSub = this.store.select(getCompare).subscribe(
       compare =>{
         this.compare = compare;
         if(compare){
@@ -39,13 +39,13 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
         }
       }
     );
-    this.dialogClosed$ = this.dialog.afterAllClosed.subscribe(()=>{
+    this.dialogClosedSub = this.dialog.afterAllClosed.subscribe(()=>{
       if(this.compare){
         const dialogRef = this.dialog.open(CompareComponent, {panelClass:'compare-dialog'});
       }
       
     });
-    this.pokemonA$ = this.store.select(getPokemonA).subscribe(
+    this.pokemonASub = this.store.select(getPokemonA).subscribe(
       pokemonA => {
         if (pokemonA !== null){
           this.openSnackBar(pokemonA.name);
@@ -55,10 +55,10 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
   }
 
   ngOnDestroy(): void {
-    this.isFiltering$.unsubscribe();
-    this.compare$.unsubscribe();
-    this.dialogClosed$.unsubscribe();
-    this.pokemonA$.unsubscribe();
+    this.isFilteringSub.unsubscribe();
+    this.compareSub.unsubscribe();
+    this.dialogClosedSub.unsubscribe();
+    this.pokemonASub.unsubscribe();
   }
 
   compare = false;

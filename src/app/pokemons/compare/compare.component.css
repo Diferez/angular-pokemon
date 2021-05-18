@@ -1,7 +1,6 @@
 .pokemon-img{
   display: inline-block;
-  width: 25vw;
-  
+  width: 300px;
 }
 
 .image-container{
@@ -42,6 +41,5 @@
   .pokemon-img{
     display: inline-block;
     width: 35vw;
-    
   }
 }

@@ -3,6 +3,7 @@ export interface Pokemon {
   url: string;
   imgUrl: string | null;
 }
+
 export interface Favorite{
   name: string;
   path: string;
@@ -38,4 +39,8 @@ export interface Stats{
 
 export interface Details{
   flavor_text_entries:[{flavor_text:''}];
+}
+
+export interface ApiResponse{
+  results:[]
 }
