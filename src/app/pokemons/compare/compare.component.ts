@@ -5,6 +5,7 @@ import { State } from 'src/app/state/app.state';
 import { getPokemonA, getPokemonB, getPokemonDetails } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
 import { Stats } from 'src/app/shared/models/pokemon.model';
+import { getGender } from 'src/app/shared/functions/pokemonUtils'
 
 @Component({
   selector: 'app-compare',
@@ -89,10 +90,12 @@ export class CompareComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  pokemonAsex:string = '';
-  pokemonBsex:string = '';
+  pokemonAsex: string = '';
+  pokemonBsex: string = '';
   dataset: ChartDataSets[] = [];
+
   constructor(private store: Store<State>) { }
+
   ngOnDestroy(): void {
     this.store.dispatch(PokemonsActions.clearPokemonsAB());
     this.store.dispatch(PokemonsActions.disableCompare());
@@ -107,8 +110,8 @@ export class CompareComponent implements OnInit, OnDestroy {
       pokemon => this.pokemonB = pokemon!
     );
     
-    this.pokemonAsex = this.getGender();
-    this.pokemonBsex = this.getGender();
+    this.pokemonAsex = getGender();
+    this.pokemonBsex = getGender();
     
     let datasetA: ChartDataSets = {
       data:[
@@ -136,15 +139,4 @@ export class CompareComponent implements OnInit, OnDestroy {
     
     this.dataset = [datasetA, datasetB]
   }
-
-  getGender():string{
-    let gender = Math.floor(Math.random() * 9) - 1;
-    if(gender > 4){
-      return 'Female';
-    }else if(gender > -1){
-      return 'Male';
-    }
-    return 'Genderless';
-  }
-
 }

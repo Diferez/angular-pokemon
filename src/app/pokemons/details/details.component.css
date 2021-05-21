@@ -1,38 +1,38 @@
-.title{
+.title {
   justify-content: center;
 }
 
-.description-title{
+.description-title {
   font-weight: 700;
 }
 
-.description-container{
+.description-container {
   display: flex;
   flex-direction: column;
   width: 30%;
   margin: 1%;
 }
 
-.description-container-list{
+.description-container-list {
   display: flex;
   flex-direction: column;
   width: 30%;
   margin: 1%;
 }
 
-.pokemon-container{
+.pokemon-container {
   display: flex;
   justify-content: center;
 
 }
 
-.image-container{
+.image-container {
   width: 30%;
   display: inline-block;
   margin-right: 2%;
 }
 
-.description{
+.description {
   display: inline-block;
   width: 60%;
   text-align: center;
@@ -41,33 +41,33 @@
   align-self: center;
 }
 
-.stats{
+.stats {
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
 }
 
-.favorite{
+.favorite {
   background-color: var(--favorite-color);
 }
 
-@media (max-width: 500px){
-  .pokemon-container{
+@media (max-width: 500px) {
+  .pokemon-container {
     flex-direction: column;
   }
   
-  .image-container{
+  .image-container {
     align-self: center;
-    width: 90%;
+    width: 200px;
     margin-bottom: none;
   }
 
-  .description{
+  .description {
     width: 85%;
-    font-size: 1rem;
+    font-size: var(--details-description-font-size-small);
   }
 
-  .description-container-list{
+  .description-container-list {
     margin: 10px;
     width: 40%;
   }

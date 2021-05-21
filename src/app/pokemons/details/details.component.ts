@@ -8,13 +8,15 @@ import { Store } from '@ngrx/store';
 import { getPokemonA, getPokemonDetails, getPokemonStats } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
 import { LocalstoreService } from 'src/app/core/localstore.service';
-import { Details, Favorite, Stats } from 'src/app/shared/models/pokemon.model';
+import { Details, Favorite, Stats, FlavorText } from 'src/app/shared/models/pokemon.model';
+import { getGender } from 'src/app/shared/functions/pokemonUtils'
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
+
 export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   errorMessage: string = '';
   pokemon: Stats = {
@@ -55,7 +57,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     ]
   };
-  pokemonA:Stats= {
+  pokemonA: Stats = {
     name: '', 
     height: 0, 
     weight: 0, 
@@ -93,19 +95,26 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     ]
   };
-  description: Details = {flavor_text_entries:[{flavor_text:''}]};
+  description: Details = {
+    flavor_text_entries: [{
+        language: {
+          name: ''
+        },
+        flavor_text: ''
+    }]
+  };
   stats: ChartDataSets[] = [];
   gender: string = '';
   descriptionText: string = '';
   
-  isFavorite:boolean= false;
+  isFavorite: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store<State>, private dialog: MatDialog, private local:LocalstoreService) {
+  constructor(private store: Store<State>, private dialog: MatDialog, private local: LocalstoreService) {
   }
 
-  checkFavorite(name:string){
+  checkFavorite(name: string) {
     let fav=this.local.getFavorites();
-    let containsName = fav.some( (favorite:Favorite) => favorite.name === name)
+    let containsName = fav.some( (favorite: Favorite) => favorite.name === name)
     return containsName;
   }
 
@@ -114,11 +123,11 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit(): void {
-    this.gender = this.getGender();
+    this.gender = getGender();
     
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.store.select(getPokemonStats).subscribe(
       pokemon => {
         this.pokemon = pokemon;
@@ -144,38 +153,28 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
     );
   }
   
-  getDescription():string{
-    try{
-      let obj = this.description.flavor_text_entries.find((element: any) => element.language.name === 'en');
+  getDescription(): string {
+    try {
+      let obj = this.description.flavor_text_entries.find((element) => element.language.name === 'en');
       return obj!['flavor_text'].replace('', '');
     }catch{
       return '';
     }
   }
 
-  getGender():string{
-    let gender = Math.floor(Math.random() * 9) - 1;
-    if(gender > 4){
-      return 'Female';
-    }else if(gender > -1){
-      return 'Male';
-    }
-    return 'Genderless';
-  }
-
-  selectPokemon(){
-    if(this.pokemonA === null){
+  selectPokemon() {
+    if(this.pokemonA === null) {
       this.store.dispatch(PokemonsActions.setPokemonA());
     }else{
       this.store.dispatch(PokemonsActions.setPokemonB());
     }
   }
 
-  addFavorite(){
-    if(!this.isFavorite){
-      let favorite: Favorite = {path:this.pokemon.sprites.front_default, name: this.pokemon.name}
+  addFavorite() {
+    if(!this.isFavorite) {
+      let favorite: Favorite = {path: this.pokemon.sprites.front_default, name: this.pokemon.name}
       let resp = this.local.addFavorite(favorite);
-      if(resp){
+      if(resp) {
         this.isFavorite=true;
       }
     }else{

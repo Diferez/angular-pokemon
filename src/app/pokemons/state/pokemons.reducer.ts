@@ -1,15 +1,15 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { Favorite, Pokemon, Stats } from "src/app/shared/models/pokemon.model";
+import { Details, Favorite, Pokemon, Stats } from "src/app/shared/models/pokemon.model";
 import * as PokemonsActions from './pokemons.actions'
 
 
-export interface PokemonsState{
+export interface PokemonsState {
   isFiltering: boolean;
   selectedPokemon: Pokemon | null;
   pokemons: Pokemon[];
   pokemonsFiltered: Pokemon[];
   pokemonStats: Stats;
-  pokemonDetails: any;
+  pokemonDetails: Details;
   pokemonA: Stats|null;
   pokemonB: Stats|null;
   compare: boolean;
@@ -56,7 +56,14 @@ const initialState: PokemonsState = {
       }
     ]
   },
-  pokemonDetails: {},
+  pokemonDetails: {
+    flavor_text_entries: [{
+      language: {
+        name: ''
+      },
+      flavor_text: ''
+  }]
+  },
   pokemonA: null,
   pokemonB: null,
   compare: false,
@@ -107,27 +114,27 @@ export const getCompare = createSelector(
 
 export const pokemonsReducer = createReducer<PokemonsState>(
   initialState,
-  on(PokemonsActions.enableFiltering, (state, action):PokemonsState => {
+  on(PokemonsActions.enableFiltering, (state, action): PokemonsState => {
     return {
       ...state,
       pokemonsFiltered: state.pokemons.filter(pokemon => pokemon.name.includes(action.filter)),
       isFiltering: true,
     };
   }),
-  on(PokemonsActions.disableFiltering, (state):PokemonsState =>{
+  on(PokemonsActions.disableFiltering, (state): PokemonsState =>{
     return {
       ...state,
       isFiltering: false,
       pokemonsFiltered: state.pokemons,
     };
   }),
-  on(PokemonsActions.enableCompare, (state):PokemonsState =>{
+  on(PokemonsActions.enableCompare, (state): PokemonsState =>{
     return {
       ...state,
       compare: true,
     };
   }),
-  on(PokemonsActions.disableCompare, (state):PokemonsState =>{
+  on(PokemonsActions.disableCompare, (state): PokemonsState =>{
     return {
       ...state,
       compare: false,
@@ -156,13 +163,13 @@ export const pokemonsReducer = createReducer<PokemonsState>(
   on(PokemonsActions.loadPokemonSuccess, (state, action): PokemonsState => {
     return{
       ...state,
-      pokemonStats:action.pokemon,
+      pokemonStats: action.pokemon,
     }
   }),
   on(PokemonsActions.loadPokemonDetailsSuccess, (state, action): PokemonsState => {
     return{
       ...state,
-      pokemonDetails:action.details,
+      pokemonDetails: action.details,
     }
   }),
   on(PokemonsActions.setPokemonA, (state): PokemonsState => {
@@ -175,7 +182,7 @@ export const pokemonsReducer = createReducer<PokemonsState>(
     return{
       ...state,
       pokemonB: state.pokemonStats,
-      compare:true,
+      compare: true,
     }
   }),
   on(PokemonsActions.clearPokemonsAB, (state): PokemonsState => {

@@ -6,25 +6,30 @@ html, body {
 
 body { margin: 0; font-family: Roboto, 'Helvetica Neue', sans-serif; }
 
-.snack .mat-snack-bar-container{
+.snack .mat-snack-bar-container {
   font-size: 20rem;
 }
 
-.cdk-overlay-container{
+.cdk-overlay-container {
   width: 100vw;
 }
 
-@media (max-width: 500px){
-  .compare-dialog{
+@media (max-width: 500px) {
+  .compare-dialog {
     height: 60vh;
   }
 
-  .details-dialog{
+  .details-dialog {
     height: 75vh;
     width: 90vh;
   }
 }   
 
 :root {
+  --carousel-font-size: 1.5rem;
+  --carousel-font-size-small: 1.2rem;
+  --snackbar-font-size: 20rem;
+  --compare-title-font-size-small: 1.1rem;
+  --details-description-font-size-small: 1rem;
   --favorite-color: #ffff00;
 }

@@ -2,84 +2,83 @@ import { createAction, props } from '@ngrx/store'
 import { Pokemon, Stats, Details } from 'src/app/shared/models/pokemon.model';
 
 export const enableFiltering = createAction(
-    '[Pokemons] Filtering On',
-    props<{filter:string}>()
+  '[Pokemons] Filtering On',
+  props<{filter: string}>()
 );
 
 export const disableFiltering = createAction(
-    '[Pokemons] Filtering Off'
+  '[Pokemons] Filtering Off'
 );
 
 export const enableCompare = createAction(
-    '[Pokemons] Compare On'
+  '[Pokemons] Compare On'
 );
 
 export const disableCompare = createAction(
-    '[Pokemons] Compare Off'
+  '[Pokemons] Compare Off'
 );
 
 export const setSelectedPokemon = createAction(
-    '[Pokemons] Set Selected Pokemon',
-    props<{pokemon: Pokemon}>()
+  '[Pokemons] Set Selected Pokemon',
+  props<{pokemon: Pokemon}>()
 );
 
 export const clearSelectedPokemon = createAction(
-    '[Pokemons] Clear Selected Pokemon'
+  '[Pokemons] Clear Selected Pokemon'
 );
 
 export const loadPokemons = createAction(
-    '[Pokemons] Load'
+  '[Pokemons] Load'
 );
 
 export const loadPokemonsSuccess = createAction(
-    '[Pokemons] Load Success',
-    props<{pokemons:Pokemon[]}>()
+  '[Pokemons] Load Success',
+  props<{pokemons: Pokemon[]}>()
 );
 
 export const loadPokemonsFailed = createAction(
-    '[Pokemons] Load Fail',
-    props<{error:string}>()
+  '[Pokemons] Load Fail',
+  props<{error: string}>()
 );
 
 export const loadPokemon = createAction(
-    '[Pokemons] Load Pokemon',
-    props<{url:string}>()
+  '[Pokemons] Load Pokemon',
+  props<{url: string}>()
 );
 
 export const loadPokemonSuccess = createAction(
-    '[Pokemons] Load Success Pokemon',
-    props<{pokemon:Stats}>()
+  '[Pokemons] Load Success Pokemon',
+  props<{pokemon: Stats}>()
 );
 
 export const loadPokemonFailed = createAction(
-    '[Pokemons] Load Fail Pokemon',
-    props<{error:string}>()
+  '[Pokemons] Load Fail Pokemon',
+  props<{error: string}>()
 );
 
 export const loadPokemonDetails = createAction(
-    '[Pokemons] Load Pokemon Details',
-    props<{url:string}>()
+  '[Pokemons] Load Pokemon Details',
+  props<{url: string}>()
 );
 
 export const loadPokemonDetailsSuccess = createAction(
-    '[Pokemons] Load Success Pokemon Details',
-    props<{details:Stats}>()
+  '[Pokemons] Load Success Pokemon Details',
+  props<{details: Details}>()
 );
 
 export const loadPokemonDetailsFailed = createAction(
-    '[Pokemons] Load Fail Pokemon Details',
-    props<{error:string}>()
+  '[Pokemons] Load Fail Pokemon Details',
+  props<{error: string}>()
 );
 
-
 export const setPokemonA = createAction(
-    '[Pokemons] Set Pokemon A',
+  '[Pokemons] Set Pokemon A',
 );
 
 export const setPokemonB = createAction(
-    '[Pokemons] Set Pokemon B',
+  '[Pokemons] Set Pokemon B',
 );
 
 export const clearPokemonsAB = createAction(
-    '[Pokemons] Clear Pokemons AB'
+  '[Pokemons] Clear Pokemons AB'
 );

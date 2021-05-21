@@ -9,22 +9,22 @@
 .big-carousel {
   margin-top: 20px;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: var(--carousel-font-size);
 }
 
 .small-carousel {
   display: none;
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
   .small-carousel {
     display: block;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: var(--carousel-font-size-small);
     margin-top: 20px;
   }
   
-  .big-carousel{
+  .big-carousel {
     display: none;
   }
 }

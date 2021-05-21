@@ -34,20 +34,20 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
     this.compareSub = this.store.select(getCompare).subscribe(
       compare =>{
         this.compare = compare;
-        if(compare){
+        if(compare) {
           this.closeSnackBar();
         }
       }
     );
     this.dialogClosedSub = this.dialog.afterAllClosed.subscribe(()=>{
-      if(this.compare){
+      if(this.compare) {
         const dialogRef = this.dialog.open(CompareComponent, {panelClass:'compare-dialog'});
       }
       
     });
     this.pokemonASub = this.store.select(getPokemonA).subscribe(
       pokemonA => {
-        if (pokemonA !== null){
+        if (pokemonA !== null) {
           this.openSnackBar(pokemonA.name);
         }
       }
@@ -70,24 +70,24 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
     this.filtering = false;
   }
 
-  onIntersection(event:IntersectionObserverEntry[]){
+  onIntersection(event: IntersectionObserverEntry[]) {
     event.map((inter) => {
-      if (inter.intersectionRatio > 0.45){
+      if (inter.intersectionRatio > 0.45) {
         this.store.dispatch(PokemonsActions.loadPokemons());
       }
     });
   }
 
-  openSnackBar(name:string) {
+  openSnackBar(name: string) {
     let horizontalPosition: MatSnackBarHorizontalPosition = 'right';
     let verticalPosition: MatSnackBarVerticalPosition = 'bottom';
     this._snackBar.open(name.toUpperCase(), '', 
-      {
-        panelClass: 'snack', 
-        verticalPosition: verticalPosition, 
-        horizontalPosition:horizontalPosition
-      });
-    }
+    {
+      panelClass: 'snack', 
+      verticalPosition: verticalPosition, 
+      horizontalPosition: horizontalPosition
+    });
+  }
 
   closeSnackBar() {
     this._snackBar.dismiss();

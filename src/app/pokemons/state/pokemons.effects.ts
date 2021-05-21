@@ -5,6 +5,7 @@ import { catchError, concatMap, map, mergeMap, switchMap } from 'rxjs/operators'
 import { PokemonsService } from 'src/app/core/pokemons.service';
 import * as PokemonsActions from './pokemons.actions';
 import { of } from 'rxjs';
+
 @Injectable()
 export class PokemonsEffects {
 
@@ -33,7 +34,7 @@ export class PokemonsEffects {
   loadDetails$ = createEffect(()=>{
     return this.actions$.pipe(
       ofType(PokemonsActions.loadPokemonDetails),
-      switchMap((action) => this.pokemonsService.getPokemon(action.url).pipe(
+      switchMap((action) => this.pokemonsService.getDescription(action.url).pipe(
         map(details => PokemonsActions.loadPokemonDetailsSuccess({ details })),
         catchError(error => of(PokemonsActions.loadPokemonDetailsFailed({ error })))
       ))

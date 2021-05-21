@@ -7,26 +7,23 @@ import * as PokemonsActions from '../../pokemons/state/pokemons.actions';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store) { }
   
-  private _filter:string = '';
+  private _filter: string = '';
 
-  get filter():string{
+  get filter(): string {
     return this._filter;
   }
   
-  set filter(value:string){
+  set filter(value: string) {
     this._filter = value.toLowerCase();
-    if(this._filter !== ''){
+    if(this._filter !== '') {
       this.store.dispatch(PokemonsActions.enableFiltering({filter: this._filter}));
     }else{
       this.store.dispatch(PokemonsActions.disableFiltering());
     }
-  }
-
-  ngOnInit(): void {
   }
 
   links = [{

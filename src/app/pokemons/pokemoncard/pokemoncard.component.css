@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 770px){
+@media (max-width: 770px) {
   .example-card {
     width: 10rem;
     height: 14rem;
@@ -12,7 +12,7 @@
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
   .example-card {
     width: 10rem;
     height: 14rem;

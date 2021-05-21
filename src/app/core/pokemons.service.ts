@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 
 export class PokemonsService {
   page = 0;
-  private pokemonApiUrl = environment.POKEMONDATAAPI;
+  pokemonApiUrl = environment.POKEMONDATAAPI;
   constructor(private http: HttpClient) { }
 
   getPokemons(): Observable<Pokemon[]> {
@@ -26,20 +26,20 @@ export class PokemonsService {
     );
   }
 
-  getPokemon(url:string): Observable<Stats>{
+  getPokemon(url: string): Observable<Stats>{
     return this.http.get<Stats>(url)
     .pipe(
         catchError(this.handleError)
       );
   }
 
-  getDescription(url:string): Observable<Details>{
+  getDescription(url: string): Observable<Details>{
     return this.http.get<Details>(url).pipe(
         catchError(this.handleError)
       );
   }
 
-  private handleError(err: HttpErrorResponse) { 
+  handleError(err: HttpErrorResponse) { 
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;

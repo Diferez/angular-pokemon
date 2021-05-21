@@ -7,29 +7,25 @@
   background-size: cover;
 }
 
-.pokemon-list-container{
+.pokemon-list-container {
   display: flex;
   justify-content: center;
   width: 100vw;
   flex-flow: row wrap;
 }
 
-.pokeball{
+.pokeball {
   display: flex;
   justify-content: center;
 }
 
-.snack{
-  color: blue;
-}
-
-@media (max-width: 500px){
-  .pokeball{
+@media (max-width: 500px) {
+  .pokeball {
     width: 80vw;
     height: auto;
   }
   
-  .pokeball-gif{
+  .pokeball-gif {
     width: 80vw;
     height: auto;
   }

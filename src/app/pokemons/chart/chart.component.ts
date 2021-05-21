@@ -8,8 +8,9 @@ import { Label } from 'ng2-charts';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
-  @Input() stats:ChartDataSets[]=[{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
+
+export class ChartComponent {
+  @Input() stats: ChartDataSets[]=[{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
   
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -40,16 +41,4 @@ export class ChartComponent implements OnInit {
   barChartPlugins = [pluginDataLabels];
 
   constructor() { }
-
-  ngOnInit(): void {
-    
-  }
-
-  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
 }
