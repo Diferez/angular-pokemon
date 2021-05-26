@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterContentInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { throwError } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
 import { State } from 'src/app/state/app.state';
@@ -97,10 +97,10 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   };
   description: Details = {
     flavor_text_entries: [{
-        language: {
-          name: ''
-        },
-        flavor_text: ''
+      language: {
+        name: ''
+      },
+      flavor_text: ''
     }]
   };
   stats: ChartDataSets[] = [];
@@ -113,7 +113,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
 
   checkFavorite(name: string) {
     const fav = this.local.getFavorites();
-    const containsName = fav.some( (favorite: Favorite) => favorite.name === name);
+    const containsName = fav.some((favorite: Favorite) => favorite.name === name);
     return containsName;
   }
 
@@ -129,13 +129,17 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
     this.store.select(getPokemonStats).subscribe(
       pokemon => {
         this.pokemon = pokemon;
-        this.stats = [{ data: [this.pokemon.stats[0].base_stat,
-          this.pokemon.stats[1].base_stat,
-          this.pokemon.stats[2].base_stat,
-          this.pokemon.stats[3].base_stat,
-          this.pokemon.stats[4].base_stat,
-          this.pokemon.stats[5].base_stat, ],
-        label: this.pokemon.name }];
+        this.stats = [{
+          data: [
+            this.pokemon.stats[0].base_stat,
+            this.pokemon.stats[1].base_stat,
+            this.pokemon.stats[2].base_stat,
+            this.pokemon.stats[3].base_stat,
+            this.pokemon.stats[4].base_stat,
+            this.pokemon.stats[5].base_stat,
+          ],
+          label: this.pokemon.name
+        }];
         this.isFavorite = this.checkFavorite(pokemon.name);
       }
     );
@@ -163,19 +167,19 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   selectPokemon() {
     if (this.pokemonA === null) {
       this.store.dispatch(PokemonsActions.setPokemonA());
-    }else{
+    } else {
       this.store.dispatch(PokemonsActions.setPokemonB());
     }
   }
 
   addFavorite() {
     if (!this.isFavorite) {
-      const favorite: Favorite = {path: this.pokemon.sprites.front_default, name: this.pokemon.name};
+      const favorite: Favorite = { path: this.pokemon.sprites.front_default, name: this.pokemon.name };
       const resp = this.local.addFavorite(favorite);
       if (resp) {
         this.isFavorite = true;
       }
-    }else{
+    } else {
       this.local.deleteFavorite(this.pokemon.name);
       this.isFavorite = false;
     }
@@ -184,9 +188,9 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
-        errorMessage = `An error occurred: ${err.error.message}`;
+      errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-        errorMessage = `Api returned code: ${err.status}, error message is: ${err.message}`;
+      errorMessage = `Api returned code: ${err.status}, error message is: ${err.message}`;
     }
     console.error(errorMessage);
     return throwError(errorMessage);

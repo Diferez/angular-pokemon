@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as PokemonsActions from '../../pokemons/state/pokemons.actions';
 
@@ -20,8 +20,8 @@ export class NavbarComponent {
   set filter(value: string) {
     this._filter = value.toLowerCase();
     if (this._filter !== '') {
-      this.store.dispatch(PokemonsActions.enableFiltering({filter: this._filter}));
-    }else{
+      this.store.dispatch(PokemonsActions.enableFiltering({ filter: this._filter }));
+    } else {
       this.store.dispatch(PokemonsActions.disableFiltering());
     }
   }

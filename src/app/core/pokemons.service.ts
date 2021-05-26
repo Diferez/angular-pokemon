@@ -20,23 +20,23 @@ export class PokemonsService {
     const querry = `${this.pokemonApiUrl}?offset=${off}&limit=${lim}`;
     this.page++;
     return this.http.get<ApiResponse>(querry)
-    .pipe(
-      map(data => data.results),
+      .pipe(
+        map(data => data.results),
+        catchError(this.handleError)
+      );
+  }
+
+  getPokemon(url: string): Observable<Stats> {
+    return this.http.get<Stats>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getDescription(url: string): Observable<Details> {
+    return this.http.get<Details>(url).pipe(
       catchError(this.handleError)
     );
-  }
-
-  getPokemon(url: string): Observable<Stats>{
-    return this.http.get<Stats>(url)
-    .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getDescription(url: string): Observable<Details>{
-    return this.http.get<Details>(url).pipe(
-        catchError(this.handleError)
-      );
   }
 
   handleError(err: HttpErrorResponse) {

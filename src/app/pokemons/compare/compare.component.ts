@@ -121,7 +121,7 @@ export class CompareComponent implements OnInit, OnDestroy {
         this.pokemonA.stats[3].base_stat,
         this.pokemonA.stats[4].base_stat,
         this.pokemonA.stats[5].base_stat
-        ],
+      ],
       label: this.pokemonA.name
     };
 
@@ -133,7 +133,7 @@ export class CompareComponent implements OnInit, OnDestroy {
         this.pokemonB.stats[3].base_stat,
         this.pokemonB.stats[4].base_stat,
         this.pokemonB.stats[5].base_stat
-        ],
+      ],
       label: this.pokemonB.name
     };
 

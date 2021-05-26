@@ -9,16 +9,16 @@ import { environment } from 'src/environments/environment';
 })
 
 export class LocalstoreService {
-  initialFavorites: Favorite[] = [{path: environment.POKEMONIMAGEAPI + '1.png', name: 'bulbasaur'},
-                                  {path: environment.POKEMONIMAGEAPI + '4.png', name: 'charmander'},
-                                  {path: environment.POKEMONIMAGEAPI + '7.png', name: 'squirtle'}];
+  initialFavorites: Favorite[] = [{ path: environment.POKEMONIMAGEAPI + '1.png', name: 'bulbasaur' },
+  { path: environment.POKEMONIMAGEAPI + '4.png', name: 'charmander' },
+  { path: environment.POKEMONIMAGEAPI + '7.png', name: 'squirtle' }];
   favorites = new BehaviorSubject(this.initialFavorites);
 
   constructor(private _snackBar: MatSnackBar) {
     if (this.getFavorites.length === -1) {
       localStorage.setItem('favorites', JSON.stringify(this.initialFavorites));
       this.favorites = new BehaviorSubject(this.initialFavorites);
-    }else{
+    } else {
       this.favorites = new BehaviorSubject(this.getFavorites());
     }
   }
@@ -30,15 +30,15 @@ export class LocalstoreService {
       this.favorites.next(temporalFavorites);
       localStorage.setItem('favorites', JSON.stringify(temporalFavorites));
       return true;
-    }else{
+    } else {
       const horizontalPosition: MatSnackBarHorizontalPosition = 'center';
       const verticalPosition: MatSnackBarVerticalPosition = 'top';
       this._snackBar.open('You already have 5 favorites', '',
-      {
-       verticalPosition,
-       horizontalPosition,
-       duration: 5 * 1000
-      });
+        {
+          verticalPosition,
+          horizontalPosition,
+          duration: 5 * 1000
+        });
       return false;
     }
   }

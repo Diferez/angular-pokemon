@@ -3,7 +3,7 @@ import { Pokemon, Stats, Details } from 'src/app/shared/models/pokemon.model';
 
 export const enableFiltering = createAction(
   '[Pokemons] Filtering On',
-  props<{filter: string}>()
+  props<{ filter: string }>()
 );
 
 export const disableFiltering = createAction(
@@ -20,7 +20,7 @@ export const disableCompare = createAction(
 
 export const setSelectedPokemon = createAction(
   '[Pokemons] Set Selected Pokemon',
-  props<{pokemon: Pokemon}>()
+  props<{ pokemon: Pokemon }>()
 );
 
 export const clearSelectedPokemon = createAction(
@@ -33,42 +33,42 @@ export const loadPokemons = createAction(
 
 export const loadPokemonsSuccess = createAction(
   '[Pokemons] Load Success',
-  props<{pokemons: Pokemon[]}>()
+  props<{ pokemons: Pokemon[] }>()
 );
 
 export const loadPokemonsFailed = createAction(
   '[Pokemons] Load Fail',
-  props<{error: string}>()
+  props<{ error: string }>()
 );
 
 export const loadPokemon = createAction(
   '[Pokemons] Load Pokemon',
-  props<{url: string}>()
+  props<{ url: string }>()
 );
 
 export const loadPokemonSuccess = createAction(
   '[Pokemons] Load Success Pokemon',
-  props<{pokemon: Stats}>()
+  props<{ pokemon: Stats }>()
 );
 
 export const loadPokemonFailed = createAction(
   '[Pokemons] Load Fail Pokemon',
-  props<{error: string}>()
+  props<{ error: string }>()
 );
 
 export const loadPokemonDetails = createAction(
   '[Pokemons] Load Pokemon Details',
-  props<{url: string}>()
+  props<{ url: string }>()
 );
 
 export const loadPokemonDetailsSuccess = createAction(
   '[Pokemons] Load Success Pokemon Details',
-  props<{details: Details}>()
+  props<{ details: Details }>()
 );
 
 export const loadPokemonDetailsFailed = createAction(
   '[Pokemons] Load Fail Pokemon Details',
-  props<{error: string}>()
+  props<{ error: string }>()
 );
 
 export const setPokemonA = createAction(

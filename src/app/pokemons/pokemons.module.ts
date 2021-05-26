@@ -14,7 +14,7 @@ import { pokemonsReducer } from './state/pokemons.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PokemonsEffects } from './state/pokemons.effects';
 import { CompareComponent } from './compare/compare.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [

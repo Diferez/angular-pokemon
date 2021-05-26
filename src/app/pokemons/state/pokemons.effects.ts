@@ -25,7 +25,7 @@ export class PokemonsEffects {
     return this.actions$.pipe(
       ofType(PokemonsActions.loadPokemon),
       switchMap((action) => this.pokemonsService.getPokemon(action.url).pipe(
-        map(pokemon => PokemonsActions.loadPokemonSuccess({ pokemon})),
+        map(pokemon => PokemonsActions.loadPokemonSuccess({ pokemon })),
         catchError(error => of(PokemonsActions.loadPokemonFailed({ error })))
       ))
     );

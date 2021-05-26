@@ -10,8 +10,8 @@ export interface PokemonsState {
   pokemonsFiltered: Pokemon[];
   pokemonStats: Stats;
   pokemonDetails: Details;
-  pokemonA: Stats|null;
-  pokemonB: Stats|null;
+  pokemonA: Stats | null;
+  pokemonB: Stats | null;
   compare: boolean;
 }
 
@@ -28,13 +28,13 @@ const initialState: PokemonsState = {
     name: '',
     height: 0,
     weight: 0,
-    sprites: {front_default: ''},
+    sprites: { front_default: '' },
     abilities: [{
       ability: {
         name: ''
       }
     }],
-    types: [{type: {name: ''}}],
+    types: [{ type: { name: '' } }],
     stats: [
       {
         base_stat: 0
@@ -62,7 +62,7 @@ const initialState: PokemonsState = {
         name: ''
       },
       flavor_text: ''
-  }]
+    }]
   },
   pokemonA: null,
   pokemonB: null,
@@ -141,52 +141,52 @@ export const pokemonsReducer = createReducer<PokemonsState>(
     };
   }),
   on(PokemonsActions.setSelectedPokemon, (state, action): PokemonsState => {
-    return{
+    return {
       ...state,
       selectedPokemon: action.pokemon,
     };
   }),
   on(PokemonsActions.clearSelectedPokemon, (state): PokemonsState => {
-    return{
+    return {
       ...state,
       selectedPokemon: null,
     };
   }),
   on(PokemonsActions.loadPokemonsSuccess, (state, action): PokemonsState => {
     const pokemonsTemp = state.pokemons.concat(action.pokemons);
-    return{
+    return {
       ...state,
       pokemons: pokemonsTemp,
       pokemonsFiltered: pokemonsTemp,
     };
   }),
   on(PokemonsActions.loadPokemonSuccess, (state, action): PokemonsState => {
-    return{
+    return {
       ...state,
       pokemonStats: action.pokemon,
     };
   }),
   on(PokemonsActions.loadPokemonDetailsSuccess, (state, action): PokemonsState => {
-    return{
+    return {
       ...state,
       pokemonDetails: action.details,
     };
   }),
   on(PokemonsActions.setPokemonA, (state): PokemonsState => {
-    return{
+    return {
       ...state,
       pokemonA: state.pokemonStats,
     };
   }),
   on(PokemonsActions.setPokemonB, (state): PokemonsState => {
-    return{
+    return {
       ...state,
       pokemonB: state.pokemonStats,
       compare: true,
     };
   }),
   on(PokemonsActions.clearPokemonsAB, (state): PokemonsState => {
-    return{
+    return {
       ...state,
       pokemonA: null,
       pokemonB: null,

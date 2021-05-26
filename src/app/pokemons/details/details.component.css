@@ -23,7 +23,6 @@
 .pokemon-container {
   display: flex;
   justify-content: center;
-
 }
 
 .image-container {
@@ -55,7 +54,7 @@
   .pokemon-container {
     flex-direction: column;
   }
-  
+
   .image-container {
     align-self: center;
     width: 200px;
@@ -66,9 +65,9 @@
     width: 85%;
     font-size: var(--details-description-font-size-small);
   }
-
+  
   .description-container-list {
     margin: 10px;
     width: 40%;
   }
-}   
+}

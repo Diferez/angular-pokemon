@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/state/app.state';
 import { getCompare, getIsFiltering, getPokemonA, getPokemons } from '../state/pokemons.reducer';
 import * as PokemonsActions from '../state/pokemons.actions';
-import {Pokemon} from '../../shared/models/pokemon.model';
+import { Pokemon } from '../../shared/models/pokemon.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,6 @@ import { CompareComponent } from '../compare/compare.component';
 })
 
 export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy {
-
   errorMessage = '';
   filtering = true;
   pokemons$: Observable<Pokemon[]>;
@@ -27,7 +26,7 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
   pokemonASub: Subscription;
   compare = false;
 
-  constructor( private store: Store<State>, private _snackBar: MatSnackBar,  private dialog: MatDialog) {
+  constructor(private store: Store<State>, private _snackBar: MatSnackBar, private dialog: MatDialog) {
     this.pokemons$ = this.store.select(getPokemons);
     this.isFilteringSub = this.store.select(getIsFiltering).subscribe(
       isFilteringSub => this.filtering = isFilteringSub
@@ -42,7 +41,7 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
     );
     this.dialogClosedSub = this.dialog.afterAllClosed.subscribe(() => {
       if (this.compare) {
-        const dialogRef = this.dialog.open(CompareComponent, {panelClass: 'compare-dialog'});
+        const dialogRef = this.dialog.open(CompareComponent, { panelClass: 'compare-dialog' });
       }
 
     });
@@ -82,11 +81,11 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
     const horizontalPosition: MatSnackBarHorizontalPosition = 'right';
     const verticalPosition: MatSnackBarVerticalPosition = 'bottom';
     this._snackBar.open(name.toUpperCase(), '',
-    {
-      panelClass: 'snack',
-      verticalPosition,
-      horizontalPosition
-    });
+      {
+        panelClass: 'snack',
+        verticalPosition,
+        horizontalPosition
+      });
   }
 
   closeSnackBar() {

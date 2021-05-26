@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class PokemoncardComponent {
-  @Input() pokemon: Pokemon = {name: '', url: '', imgUrl: ''};
+  @Input() pokemon: Pokemon = { name: '', url: '', imgUrl: '' };
   @Input() imgUrl = '';
   detailsUrl = environment.POKEMONSPECIESAPI;
 
@@ -23,10 +23,10 @@ export class PokemoncardComponent {
 
   selectPokemon() {
     const Url = `${this.detailsUrl}${this.pokemon.url.split('/')[6]}/`;
-    const poke: Pokemon = {...this.pokemon, imgUrl: this.imgUrl};
-    this.store.dispatch(PokemonsActions.setSelectedPokemon({pokemon: poke}));
-    this.store.dispatch(PokemonsActions.loadPokemon({url: this.pokemon.url}));
-    this.store.dispatch(PokemonsActions.loadPokemonDetails({url: Url}));
-    const dialogRef = this.dialog.open(DetailsComponent, {panelClass: 'details-dialog'});
+    const poke: Pokemon = { ...this.pokemon, imgUrl: this.imgUrl };
+    this.store.dispatch(PokemonsActions.setSelectedPokemon({ pokemon: poke }));
+    this.store.dispatch(PokemonsActions.loadPokemon({ url: this.pokemon.url }));
+    this.store.dispatch(PokemonsActions.loadPokemonDetails({ url: Url }));
+    const dialogRef = this.dialog.open(DetailsComponent, { panelClass: 'details-dialog' });
   }
 }
