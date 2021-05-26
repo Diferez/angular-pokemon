@@ -1,4 +1,4 @@
-import { createAction, props } from '@ngrx/store'
+import { createAction, props } from '@ngrx/store';
 import { Pokemon, Stats, Details } from 'src/app/shared/models/pokemon.model';
 
 export const enableFiltering = createAction(

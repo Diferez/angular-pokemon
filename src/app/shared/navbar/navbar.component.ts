@@ -10,16 +10,16 @@ import * as PokemonsActions from '../../pokemons/state/pokemons.actions';
 export class NavbarComponent {
 
   constructor(private store: Store) { }
-  
-  private _filter: string = '';
+
+  private _filter = '';
 
   get filter(): string {
     return this._filter;
   }
-  
+
   set filter(value: string) {
     this._filter = value.toLowerCase();
-    if(this._filter !== '') {
+    if (this._filter !== '') {
       this.store.dispatch(PokemonsActions.enableFiltering({filter: this._filter}));
     }else{
       this.store.dispatch(PokemonsActions.disableFiltering());
@@ -27,10 +27,10 @@ export class NavbarComponent {
   }
 
   links = [{
-    label:'Home', path:'home'
-  }, 
+    label: 'Home', path: 'home'
+  },
   {
-    label:'Pokemons', path:'pokemons'
+    label: 'Pokemons', path: 'pokemons'
   }];
   activeLink = this.links[0];
 }

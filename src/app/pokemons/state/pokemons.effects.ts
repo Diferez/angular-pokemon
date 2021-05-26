@@ -18,26 +18,26 @@ export class PokemonsEffects {
         map(pokemons => PokemonsActions.loadPokemonsSuccess({ pokemons })),
         catchError(error => of(PokemonsActions.loadPokemonsFailed({ error })))
       ))
-    )
-  })
+    );
+  });
 
-  loadPokemon$ = createEffect(()=>{
+  loadPokemon$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PokemonsActions.loadPokemon),
       switchMap((action) => this.pokemonsService.getPokemon(action.url).pipe(
         map(pokemon => PokemonsActions.loadPokemonSuccess({ pokemon})),
         catchError(error => of(PokemonsActions.loadPokemonFailed({ error })))
       ))
-    )
-  })
+    );
+  });
 
-  loadDetails$ = createEffect(()=>{
+  loadDetails$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PokemonsActions.loadPokemonDetails),
       switchMap((action) => this.pokemonsService.getDescription(action.url).pipe(
         map(details => PokemonsActions.loadPokemonDetailsSuccess({ details })),
         catchError(error => of(PokemonsActions.loadPokemonDetailsFailed({ error })))
       ))
-    )
-  })
+    );
+  });
 }

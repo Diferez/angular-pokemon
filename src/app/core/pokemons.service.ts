@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { tap, catchError, map } from 'rxjs/operators'
-import { Observable, throwError } from "rxjs";
-import { Details, Pokemon, Stats, ApiResponse } from "../shared/models/pokemon.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { tap, catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { Details, Pokemon, Stats, ApiResponse } from '../shared/models/pokemon.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,9 +15,9 @@ export class PokemonsService {
   constructor(private http: HttpClient) { }
 
   getPokemons(): Observable<Pokemon[]> {
-    let off = this.page * 20;
-    let lim = 20;
-    let querry = `${this.pokemonApiUrl}?offset=${off}&limit=${lim}`;
+    const off = this.page * 20;
+    const lim = 20;
+    const querry = `${this.pokemonApiUrl}?offset=${off}&limit=${lim}`;
     this.page++;
     return this.http.get<ApiResponse>(querry)
     .pipe(
@@ -39,7 +39,7 @@ export class PokemonsService {
       );
   }
 
-  handleError(err: HttpErrorResponse) { 
+  handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;

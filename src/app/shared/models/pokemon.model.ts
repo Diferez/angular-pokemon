@@ -16,7 +16,7 @@ export interface Stats {
   sprites: {front_default: string};
   abilities: [{ability: {name: string}}];
   types: [{type: {name: string}}];
-  stats:[{
+  stats: [{
     base_stat: number;
   },
   {
@@ -38,16 +38,16 @@ export interface Stats {
 }
 
 export interface Details {
-  flavor_text_entries:[FlavorText];
+  flavor_text_entries: [FlavorText];
 }
 
 export interface ApiResponse {
-  results:[]
+  results: [];
 }
 
 export interface FlavorText {
   language: {
     name: string;
-  }
+  };
   flavor_text: string;
 }

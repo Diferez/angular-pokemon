@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent {
   $favorites: Observable<Favorite[]>;
 
-  constructor(private local: LocalstoreService) { 
+  constructor(private local: LocalstoreService) {
     this.$favorites = this.local.favorites;
   }
 }

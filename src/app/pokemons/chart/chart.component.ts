@@ -10,18 +10,18 @@ import { Label } from 'ng2-charts';
 })
 
 export class ChartComponent {
-  @Input() stats: ChartDataSets[]=[{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
-  
+  @Input() stats: ChartDataSets[] = [{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }];
+
   barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { 
-      xAxes: [{}], 
+    scales: {
+      xAxes: [{}],
       yAxes: [{
         ticks: {
           min: 0,
           suggestedMax: 110,
         }
-      }] 
+      }]
     },
     plugins: {
       datalabels: {
@@ -31,7 +31,7 @@ export class ChartComponent {
     },
     maintainAspectRatio: true
   };
-  
+
   barChartLabels: Label[] = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
 
   barChartType: ChartType = 'bar';
