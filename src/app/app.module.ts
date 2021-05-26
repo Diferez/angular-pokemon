@@ -30,7 +30,7 @@ import { HomeModule } from './home/home.module';
     HttpClientModule,
     AppRoutingModule,
     EffectsModule.forRoot([]),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ }, { }),
     PokemonsModule,
     StoreDevtoolsModule.instrument({ name: 'Talos', maxAge: 25, logOnly: environment.production }),
     HomeModule,

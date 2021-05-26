@@ -15,7 +15,7 @@ export class ChartComponent {
   barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
-      xAxes: [{}],
+      xAxes: [{ }],
       yAxes: [{
         ticks: {
           min: 0,
