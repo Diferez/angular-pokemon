@@ -39,7 +39,7 @@ export class PokemonsService {
     );
   }
 
-  handleError(err: HttpErrorResponse) {
+  handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;

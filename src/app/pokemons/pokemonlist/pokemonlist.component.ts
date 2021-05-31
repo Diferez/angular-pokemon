@@ -54,23 +54,23 @@ export class PokemonListComponent implements OnInit, AfterContentInit, OnDestroy
     );
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.isFilteringSub.unsubscribe();
     this.compareSub.unsubscribe();
     this.dialogClosedSub.unsubscribe();
     this.pokemonASub.unsubscribe();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.dispatch(PokemonsActions.loadPokemons());
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     this.filtering = false;
   }
 
   onIntersection(event: IntersectionObserverEntry[]) {
-    event.map((inter) => {
+    event.forEach((inter) => {
       if (inter.intersectionRatio > 0.45) {
         this.store.dispatch(PokemonsActions.loadPokemons());
       }

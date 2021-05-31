@@ -96,12 +96,12 @@ export class CompareComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<State>) { }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.store.dispatch(PokemonsActions.clearPokemonsAB());
     this.store.dispatch(PokemonsActions.disableCompare());
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.select(getPokemonA).subscribe(
       pokemon => this.pokemonA = pokemon!
     );

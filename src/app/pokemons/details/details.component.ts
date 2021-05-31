@@ -10,6 +10,7 @@ import * as PokemonsActions from '../state/pokemons.actions';
 import { LocalstoreService } from 'src/app/core/localstore.service';
 import { Details, Favorite, Stats, FlavorText } from 'src/app/shared/models/pokemon.model';
 import { getGender } from 'src/app/shared/functions/pokemonUtils';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -111,17 +112,17 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
   constructor(private store: Store<State>, private dialog: MatDialog, private local: LocalstoreService) {
   }
 
-  checkFavorite(name: string) {
+  checkFavorite(name: string): boolean {
     const fav = this.local.getFavorites();
     const containsName = fav.some((favorite: Favorite) => favorite.name === name);
     return containsName;
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.store.dispatch(PokemonsActions.clearSelectedPokemon());
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     this.gender = getGender();
   }
 
@@ -185,7 +186,7 @@ export class DetailsComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
-  handleError(err: HttpErrorResponse) {
+  handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;

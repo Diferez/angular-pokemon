@@ -23,7 +23,7 @@ export class LocalstoreService {
     }
   }
 
-  addFavorite(favorite: Favorite) {
+  addFavorite(favorite: Favorite): boolean {
     const temporalFavorites = this.getFavorites();
     if (temporalFavorites.length <= 4) {
       temporalFavorites.push(favorite);
@@ -43,7 +43,7 @@ export class LocalstoreService {
     }
   }
 
-  getFavorites() {
+  getFavorites(): Favorite[] {
     return JSON.parse(localStorage.getItem('favorites') || '{}');
   }
 
