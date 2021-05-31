@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html, body { 
+  height: auto; 
+}
+
+body { margin: 0; font-family: Roboto, 'Helvetica Neue', sans-serif; }
+
+.snack .mat-snack-bar-container {
+  font-size: 20rem;
+}
+
+.cdk-overlay-container {
+  width: 100vw;
+}
+
+@media (max-width: 500px) {
+  .compare-dialog {
+    height: 60vh;
+  }
+
+  .details-dialog {
+    height: 75vh;
+    width: 90vh;
+  }
+}   
+
+:root {
+  --carousel-font-size: 1.5rem;
+  --carousel-font-size-small: 1.2rem;
+  --snackbar-font-size: 20rem;
+  --compare-title-font-size-small: 1.1rem;
+  --details-description-font-size-small: 1rem;
+  --favorite-color: #ffff00;
+  --white-link: #ffffff;
+}

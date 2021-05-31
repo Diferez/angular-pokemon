@@ -1,0 +1,61 @@
+<mat-dialog-content class="mat-typography">
+  <mat-card class="example-card">
+  <mat-card-header class="title">
+    <mat-card-title>{{pokemonA.name | uppercase}} vs {{pokemonB.name | uppercase}}</mat-card-title>
+  </mat-card-header>
+  <div class="pokemon-container">
+    <div class="image-container">
+    <img mat-card-image src="{{pokemonA.sprites.front_default}}" alt="{{pokemonA.name}}" class="pokemon-img">
+    <img mat-card-image src="{{pokemonB.sprites.front_default}}" alt="{{pokemonB.name}}" class="pokemon-img">
+    </div>
+    <mat-card-content class="description">
+    <span class="stats">
+      <span class="description-value">
+        {{pokemonA.height/10}} m
+      </span>
+      <span class="description-title">
+        Height:
+      </span>
+      <span class="description-value">
+        {{pokemonB.height/10}} m
+      </span>
+      <span class="description-value">
+        {{pokemonA.weight/10}} m
+      </span>
+      <span class="description-title">
+        Weight:
+      </span>
+      <span class="description-value">
+        {{pokemonB.weight/10}} m
+      </span>
+      <span class="description-value">
+        {{pokemonAsex}}
+      </span>
+      <span class="description-title">
+        Gender:
+      </span>
+      <span class="description-value">
+        {{pokemonBsex}}
+      </span>
+      <span>
+        <div class="pokemon-ability">
+        <div *ngFor="let ability of pokemonA.abilities" >{{ability.ability.name}}</div>
+        </div>
+      </span>
+      <span class ="description-title">
+        Abilities:
+      </span>
+      <span>
+        <div>
+        <div *ngFor="let ability of pokemonB.abilities">{{ability.ability.name}}</div>
+        </div>
+      </span>
+    </span>
+    </mat-card-content>
+  </div>
+  <app-chart [stats]="dataset"></app-chart>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

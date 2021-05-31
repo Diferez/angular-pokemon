@@ -1,0 +1,32 @@
+.example-card {
+  margin: 1%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.pokemon-list-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  flex-flow: row wrap;
+}
+
+.pokeball {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .pokeball {
+    width: 80vw;
+    height: auto;
+  }
+  
+  .pokeball-gif {
+    width: 80vw;
+    height: auto;
+  }
+}

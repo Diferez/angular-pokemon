@@ -1,0 +1,9 @@
+<div class="pokemon-list-container">
+<app-pokemoncard *ngFor="let pokemon of pokemons$ | async; index as i" [pokemon]="pokemon" [imgUrl]="pokemon.url.split('/')[6] | formatImgUrl" class="example-card"></app-pokemoncard>
+</div>
+<section *ngIf="!filtering" waIntersectionObserver waIntersectionThreshold="0.5" class="pokeball">
+    <div (waIntersectionObservee)="onIntersection($event)">
+        <img src="/assets/simple_pokeball.gif" alt="pokeball-gif" class="pokeball-gif">
+    </div>
+</section>
+

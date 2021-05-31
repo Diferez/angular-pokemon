@@ -1,0 +1,39 @@
+<mat-toolbar class="tool-bar" color='primary'>
+    <header class="navbar-container">
+      <span routerLink="" class="title">
+        <span>PokeApp</span>
+      </span>
+      <nav mat-tab-nav-bar class="nav-container" mat-align-tabs="center" >
+        <a mat-tab-link *ngFor="let link of links" 
+          (click)="activeLink = link"
+          [active]="activeLink == link"
+          [routerLink]="link.path" 
+          class="nav-link"> 
+          {{link.label}}
+        </a>
+      </nav>
+      <mat-form-field class="search-bar" [ngStyle] = "{'visibility': activeLink.label === 'Pokemons' ? '': 'hidden'}">
+        <input matInput type="text" placeholder="Search" [(ngModel)]="filter" >
+      </mat-form-field>
+    </header>
+</mat-toolbar>
+<mat-toolbar class="mobile-tool-bar"  color='primary'>
+  <mat-toolbar-row class="first-row">
+    <span>PokeApp</span>
+    <nav mat-tab-nav-bar class="nav-container" mat-align-tabs="center">
+      <a mat-tab-link *ngFor="let link of links"
+        (click)="activeLink = link"
+        [active]="activeLink == link"
+        [routerLink]="link.path"
+        class="nav-link"> 
+        {{link.label}}
+      </a>
+    </nav>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="second-row">
+    <mat-form-field class="search-bar" [ngStyle] = "{'visibility': activeLink.label === 'Pokemons' ? '': 'hidden'}">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="filter" >
+    </mat-form-field>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

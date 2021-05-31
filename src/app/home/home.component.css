@@ -1,0 +1,30 @@
+.pokemon-img {
+  image-rendering: pixelated;
+}
+
+.carousel-cell {
+  text-align: center;
+}
+
+.big-carousel {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: var(--carousel-font-size);
+}
+
+.small-carousel {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .small-carousel {
+    display: block;
+    font-weight: 500;
+    font-size: var(--carousel-font-size-small);
+    margin-top: 20px;
+  }
+  
+  .big-carousel {
+    display: none;
+  }
+}

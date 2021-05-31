@@ -1,0 +1,60 @@
+.mobile-tool-bar {
+  display: none;
+}
+
+.tool-bar {
+  height: 5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.navbar-container {
+  display: flex;
+  width: 100vw;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.title {
+  align-self: center;
+  text-decoration: none;
+}
+
+.nav-container {
+  margin: 1%;
+  display: inline-block;
+  width: 60%;
+}
+
+.search-bar {
+  padding-top: 0.55rem;
+}
+
+.nav-link {
+  color: var(--white-link);
+}
+
+@media (max-width: 500px) {
+  .tool-bar {
+    display: none;
+  }
+
+  .mobile-tool-bar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .first-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .second-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

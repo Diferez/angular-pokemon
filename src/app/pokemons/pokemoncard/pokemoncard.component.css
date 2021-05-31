@@ -1,0 +1,21 @@
+.example-card {
+  width: 14rem;
+  height: 17rem;
+  cursor: pointer;
+}
+
+@media (max-width: 770px) {
+  .example-card {
+    width: 10rem;
+    height: 14rem;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 500px) {
+  .example-card {
+    width: 10rem;
+    height: 14rem;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,67 @@
+<mat-dialog-content class="mat-typography">
+  <mat-card class="example-card">
+    <mat-card-header class="title">
+      <mat-card-title>{{pokemon.name | uppercase}}</mat-card-title>
+    </mat-card-header>
+    <div class="pokemon-container">
+    <div class="image-container">
+      <img mat-card-image [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+    </div>
+    <mat-card-content class="description">
+      <p >
+        {{getDescription()}}
+      </p>
+      <span class="stats">
+        <span class="description-container">
+          <span class ="description-title">
+            Height:
+          </span>
+          <span class="description-value">
+            {{pokemon.height/10}}m
+          </span>
+        </span>
+        <span class="description-container">
+          <span class ="description-title">
+            Weight:
+          </span>
+          <span class="description-value">
+            {{pokemon.weight/10}}kg
+          </span>
+        </span>
+        <span class="description-container">
+          <span class ="description-title">
+            Gender:
+          </span>
+          <span class="description-value">
+            {{gender}}
+          </span>
+        </span>
+        <span class="description-container-list">
+          <span class ="description-title">
+            Abilities:
+          </span>
+          <div>
+            <div *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</div>
+          </div>
+        </span>
+        <span class="description-container-list">
+          <span class ="description-title">
+            Type:
+          </span>
+          <div>
+            <div *ngFor="let type of pokemon.types">{{type.type.name}}</div>
+          </div>
+        </span>
+      </span>
+    </mat-card-content>
+    </div>
+    <div class="chart">
+      <app-chart [stats]="stats"></app-chart>
+    </div>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="selectPokemon()">Compare</button>
+  <button mat-button cdkFocusInitial (click)='addFavorite()' [ngStyle] = "{'background-color': isFavorite ? 'yellow': ''}">Favorite</button >
+</mat-dialog-actions>

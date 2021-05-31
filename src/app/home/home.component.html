@@ -1,0 +1,25 @@
+<carousel class="big-carousel" 
+  objectFit="contain"
+  [cellWidth]="'100%'" 
+  [autoplay]="true"
+  [dots]="true"
+  [loop]="true"
+  [height]=300
+  [cellsToShow]=3>
+  <div *ngFor="let item of $favorites |async" class="carousel-cell">
+    {{item.name | uppercase}}
+    <img class="pokemon-img"  [src]="item.path">
+  </div>
+</carousel>
+<carousel class="small-carousel" 
+  objectFit="contain"
+  [cellWidth]="'100%'" 
+  [autoplay]="true"
+  [dots]="true"
+  [loop]="true"
+  [cellsToShow]=1>
+  <div *ngFor="let item of $favorites |async" class="carousel-cell">
+    {{item.name | uppercase}}
+    <img class="pokemon-img"  [src]="item.path">
+  </div>
+</carousel>
